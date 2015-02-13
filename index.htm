@@ -1,0 +1,1866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Connections 2040: Choices and Voices</title>
+<meta charset="ISO-8859-1">
+<!--[if lt IE 9]>
+<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script>
+<![endif]-->
+<link type="text/css" href="css/jquery-ui-1.8.16.custom.css" rel="stylesheet" />
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+	body {
+		font-family:"Franklin Gothic Medium", "Franklin Gothic", "ITC Franklin Gothic", Arial, sans-serif;
+		font-size:0.9em;
+		/*margin:20px 50px;
+		position:relative;*/
+	}
+	#mainContent {
+		/*padding-right:260px;*/
+	}
+	#indicators {
+		/*width:250px;
+		margin-right:-260px;
+		margin-top:10px;
+		float:right;
+		border:1px solid #394C69;*/
+		vertical-align:top;
+		background-color:#394C69;
+		padding:0;
+	}
+	#indicators div.row-fluid {
+		color:#333;
+		border-bottom:1px dashed #999;
+	}
+	#indicators div.row-fluid:last-child {
+		border-bottom:0px dashed #999;
+	}
+	#indicators h3 {
+		color:white;
+		margin:0;
+		font-size:1.1em;
+		font-weight:normal;
+		line-height:38px;
+	}
+	#indicators p {
+		margin:0;
+		padding:0 5px 0 0;
+		font-size:1.0em;
+		/*font-weight:bold;*/
+		color:#ccc;
+		font-family:'open sans', arial, sans-serif;
+		line-height:38px;
+	}
+	#indicators p.info {
+		margin:10px;
+		font-size:0.9em;
+		line-height:1.1em;
+		color:white;
+	}
+	h1 {
+		/*margin:0 -260px 0 0;*/
+		padding:0 0 10px 0;
+		text-align:center;
+		border:1px dotted #394C69;
+		border-bottom:0;
+	}
+	/*h1 img {
+		max-width:871px;
+		width:100%;
+	}*/
+	h1,h2,h3 {
+		font-family:"ITC Franklin Gothic W01 Md","Franklin Gothic Medium", "Franklin Gothic", "ITC Franklin Gothic", Arial, sans-serif;
+		color: #394C69;
+	}
+	h2 {
+		font-size:1.6em;
+		padding:0;
+		margin:0;
+	}
+
+	h3 {
+		font-size:1.25em;
+		line-height:1.8em;
+	}
+
+	#mainContent table {
+		border-collapse:collapse;
+		margin:10px 0;
+		font-size:0.9em;
+	}
+	#mainContent td {
+		margin:0;
+		padding:5px;
+		border:1px dotted #aaa;
+		vertical-align:top;
+	}
+	#mainContent th {
+		border:0px;
+		margin:0;
+		padding:5px;
+		vertical-align:bottom;
+		border-bottom: 1px dotted #AAAAAA;
+	}
+	#mainContent td:not(:first-child) { text-align:right; }
+	#mainContent a {
+		color:#394C69;
+		text-decoration:underline;
+	}
+	#mainContent ul, #mainContent li {
+		list-style-type:none;
+		padding-left:0;
+		margin-left:0;
+	}
+	#mainContent li.selected {
+		background-color:#efe;
+		font-weight:bold;
+	}
+	.plus {
+		cursor:pointer;
+		background:url('http://www.dvrpc.org/energyclimate/modelordinance/img/plus.gif') no-repeat left center;
+		padding-left:15px;
+		clear:both;
+	}
+	.minus {
+		background-image:url('http://www.dvrpc.org/energyclimate/modelordinance/img/minus.gif');
+	}
+	.section {
+		margin:5px;
+		padding:5px;
+		border:1px solid #eee;
+	}
+	#pane {
+		border:1px solid #394C69;
+		text-align:center;
+		background-color:#ABD14D;
+		/*margin-right:-260px;*/
+	}
+
+	.progress {
+		background-color: white;
+		background-image: none;
+		background-repeat: repeat-x;
+		border: 1px solid rgba(0, 0, 0, 0.2);
+		border-radius: 4px 4px 4px 4px;
+		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset, 0 5px 10px rgba(0, 0, 0, 0.2);
+	}
+
+	#pane a {
+		display:inline-block;
+		margin: 10px 0;
+		padding: 0 25px;
+		text-decoration:none;
+		color:#394C69;
+		vertical-align:middle;
+		font-size:1.1em;
+	}
+	#pane a:not(:last-child) {
+		border-right:1px dotted white;
+	}
+	#pane a.selected {
+		font-weight:bold;
+	}
+	#pane a:hover {
+		color:#EFF4FB;
+	}
+	label {
+		/*display:inline-block;
+		line-height:1.75em;
+		padding-left:2.0em;
+		text-indent:-2.0em;*/
+	}
+	body #mainContent .indent {
+		margin-left:2em;
+	}
+	.view {
+		margin-top:10px;
+		border:1px solid #999;
+		background-color:#EFF4FB;
+		padding:20px;
+		color:#394C69;
+		/*float:right;*/
+	}
+	/*.view img { width:200px; }
+	.fright {
+		width:200px;
+		float:right;
+		clear:both;
+		display:block;
+		position:relative;
+		margin:0 0 10px 10px;
+	}
+	.fright span {
+		display:block;
+		font-size:0.75em;
+		background-color:rgba(255,255,255,0.7);
+		position:absolute;
+		bottom:0;
+		color:#333;
+		padding:3px;
+	}*/
+	p {
+		line-height:1.5em;
+		font-family:'open sans', arial, sans-serif;
+	}
+	input[type="image"], input[type="checkbox"], input[type="radio"] {
+		display:inline-block;
+	}
+	/*.view>img,div[data-bind]>img {max-width:380px;}*/
+	.nextButton { display:none; }
+	.button { border:1px solid #394C69;background-color:#ABD14D;margin:20px 0 0 0;padding:5px 10px;font-family:'Franklin Gothic Demi',sans-serif;text-transform:uppercase;letter-spacing:2px;font-size:1.1em;box-shadow:3px 3px 2px #999;cursor:pointer;color:#394C69;}
+	.noheight { overflow:hidden;display:block;height:0px; }
+	.clear { clear:both;height:0;width:0;}
+	.dropcap { font-family:"ITC Franklin Gothic W01 Md","Franklin Gothic Medium", "Franklin Gothic", "ITC Franklin Gothic", Arial, sans-serif;color:#ABD14D;text-outline:#394C69;text-shadow:-1px 0 0 #394C69, 0 -1px 0 #394C69, 1px 0 0 #394C69, 0 1px 0 #394C69;font-size:4.5em;float:left;vertical-align:text-top;line-height:0.9em;padding-right:10px;}
+
+	.picstrip { display:block; position:relative;height:75px;}
+	.picstrip img { position:absolute;height:75px;width:75px;}
+
+	.ui-effects-transfer {border: 2px dotted gray;background-color:rgba(0,0,0,0.1);}
+
+	#slider2010.ui-widget-content { border:0;border-bottom:1px dashed #999;background:none transparent; }
+	#slider2010 .ui-slider-handle { background-image:url('img/grayarrow.png');background-color:transparent;border:0;height:40px;width:50px;border-radius:0;box-shadow:none;}
+	#slider2010 .ui-state-hover,#slider2010 .ui-state-active,#slider2010 .ui-state-focus { background-position:0;outline:0;}
+	body .ui-slider-handle {z-index:300;}
+	.title {font-weight:normal;}
+	.popover-content .row-fluid [class*="span"] { margin-top: 2.12766%; }
+	.popover-content { padding-top:0;font-size:0.9em;color:#394C69;font-style:italic; }
+	.view *[rel="popover"], .info {
+		padding-right:16px;
+		background: center right url('img/info.png') no-repeat;
+	}
+	.modal-body img { max-width:100% !important; }
+	/*
+	#contentColumn.span8 { width: 66.9574%;}
+	#indicators { margin-left: 1.12766%;}
+	/**/
+	.affix, .affix-bottom { top:0px; right:20px;position:fixed;}
+	.affix-top { top:122px;right:20px;position:absolute; }
+	.progress { cursor:pointer;margin-bottom:5px;overflow:visible; }
+	.ui-resizable-e { width:auto; font-size: 100%;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+padding: 3px;
+background: #f7f7f7;
+border-radius: 6px;
+position: absolute;
+top: -4px;
+text-shadow:none;
+color:#394C69;
+min-width:28px;
+text-align: center;
+}
+	.view .row-fluid [class*="span"] { margin-top:2.12766%; }
+	.view .modal .row-fluid [class*="span"] { margin-top:0; }
+
+	#mainContent .nav-pills {display: block;}
+	#mainContent .nav-pills a {text-decoration:none;font-weight:bold;}
+	#mainContent .nav-pills .active a {color:white;background:#394C69;}
+
+	.handle:after {
+		content:' ';
+		display: block;
+		position: absolute;
+		bottom:-18px;
+		opacity:0.5;
+		text-align:center;
+		width:100%;
+		display: inline-block;
+		width: 14px;
+		height: 14px;
+		margin-top: 1px;
+		line-height: 14px;
+		vertical-align: text-top;
+		background-image: url("img/glyphicons-halflings.png");
+		background-position: -456px -118px;
+		background-repeat: no-repeat;
+
+	}
+
+	#map {
+		 text-align:center;
+	}
+
+	#map .map-inner {
+		width:400px;
+		height:300px;
+		display: inline-block;
+		position: relative;
+	}
+
+	#map .map-inner img {
+		position: absolute;
+		top:0;
+		left:0;
+		width:400px;
+		z-index: attr(data-z);
+	}
+
+	#mainContent label a, #mainContent label a:hover {
+		text-decoration:none;
+		border-radius: 50%;
+		background: rgb(171, 209, 77);
+		padding:0;
+		margin:0;
+		color:white;
+		min-width: 20px;
+		min-height: 20px;
+		display: inline-block;
+		text-align: center;
+		line-height: 20px;
+		font-size: 12px;
+		vertical-align: middle;
+	}
+
+	#mainContent input[disabled] + a {
+		background: #ccc;
+	}
+
+	.alert-error {
+		color: rgb(224, 85, 49);
+		background: rgba(224, 85, 49, 0.1);
+		border-color: rgba(224, 85, 49, 0.3);
+	}
+
+	.progress .bar {
+		width:10%;
+		text-align:left;
+		background: #abd14d; /* Old browsers */
+		background: -moz-linear-gradient(top,  #abd14d 0%, #94b542 99%); /* FF3.6+ */
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#abd14d), color-stop(99%,#94b542)); /* Chrome,Safari4+ */
+		background: -webkit-linear-gradient(top,  #abd14d 0%,#94b542 99%); /* Chrome10+,Safari5.1+ */
+		background: -o-linear-gradient(top,  #abd14d 0%,#94b542 99%); /* Opera 11.10+ */
+		background: -ms-linear-gradient(top,  #abd14d 0%,#94b542 99%); /* IE10+ */
+		background: linear-gradient(to bottom,  #abd14d 0%,#94b542 99%); /* W3C */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#abd14d', endColorstr='#94b542',GradientType=0 ); /* IE6-9 */
+	}
+
+    #mainContent .vertical-text {
+        vertical-align: middle;
+        width:20px;
+        overflow:hidden;
+    }
+    #mainContent .vertical-text>div {
+        width:20px;
+        display: inline-block;
+        white-space: nowrap;
+        line-height: 20px;
+        -moz-transform: translateY(50%) rotate(-90deg);
+        -moz-transform-origin: center;
+        -webkit-transform: translateY(50%) rotate(-90deg);
+        -webkit-transform-origin: center;
+        transform: translateY(50%) rotate(-90deg);
+        transform-origin: center;
+    }
+    #mainContent .vertical-text>div:after {
+        content: "";
+        display: block;
+        margin: -20px 0 100%;
+    }
+    #mainContent .vertical-text+td {
+        text-align:left;
+        border-left: 1px dotted #aaa;
+    }
+    #mainContent td:first-child {
+        border-left: 0;
+    }
+</style>
+ <!--[if IE]>
+<link rel="stylesheet" type="text/css" href="css/jquery.ui.1.8.16.ie.css"/>
+<![endif]-->
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
+ <!--[if lte IE 8]>
+     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.ie.css" />
+ <![endif]-->
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.8.21.custom.min.js"></script>
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.1.0.js"></script>
+<script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
+<script type="text/javascript">
+if (window.console === undefined) window.console = {log:function() {}};
+!function(b){function d(){this.$element.hide().trigger("hidden");a.call(this)}function a(a){var e=this.$element.hasClass("fade")?"fade":"";if(this.isShown&&this.options.backdrop){var f=b.support.transition&&e;this.$backdrop=b('<div class="modal-backdrop '+e+'" />').appendTo(document.body);"static"!=this.options.backdrop&&this.$backdrop.click(b.proxy(this.hide,this));f&&this.$backdrop[0].offsetWidth;this.$backdrop.addClass("in");f?this.$backdrop.one(b.support.transition.end,a):a()}else!this.isShown&& this.$backdrop?(this.$backdrop.removeClass("in"),b.support.transition&&this.$element.hasClass("fade")?this.$backdrop.one(b.support.transition.end,b.proxy(c,this)):c.call(this)):a&&a()}function c(){this.$backdrop.remove();this.$backdrop=null}function e(){var a=this;if(this.isShown&&this.options.keyboard)b(document).on("keyup.dismiss.modal",function(b){27==b.which&&a.hide()});else this.isShown||b(document).off("keyup.dismiss.modal")}var h=function(a,c){this.options=c;this.$element=b(a).delegate('[data-dismiss="modal"]', "click.dismiss.modal",b.proxy(this.hide,this))};h.prototype={constructor:h,toggle:function(){return this[!this.isShown?"show":"hide"]()},show:function(){var c=this,g=b.Event("show");this.$element.trigger(g);!this.isShown&&!g.isDefaultPrevented()&&(b("body").addClass("modal-open"),this.isShown=!0,e.call(this),a.call(this,function(){var a=b.support.transition&&c.$element.hasClass("fade");c.$element.parent().length||c.$element.appendTo(document.body);c.$element.show();a&&c.$element[0].offsetWidth;c.$element.addClass("in"); a?c.$element.one(b.support.transition.end,function(){c.$element.trigger("shown")}):c.$element.trigger("shown")}))},hide:function(a){a&&a.preventDefault();a=b.Event("hide");this.$element.trigger(a);if(this.isShown&&!a.isDefaultPrevented())if(this.isShown=!1,b("body").removeClass("modal-open"),e.call(this),this.$element.removeClass("in"),b.support.transition&&this.$element.hasClass("fade")){var c=this,f=setTimeout(function(){c.$element.off(b.support.transition.end);d.call(c)},500);this.$element.one(b.support.transition.end, function(){clearTimeout(f);d.call(c)})}else d.call(this)}};b.fn.modal=function(a){return this.each(function(){var c=b(this),e=c.data("modal"),d=b.extend({},b.fn.modal.defaults,c.data(),"object"==typeof a&&a);e||c.data("modal",e=new h(this,d));if("string"==typeof a)e[a]();else d.show&&e.show()})};b.fn.modal.defaults={backdrop:!0,keyboard:!0,show:!0};b.fn.modal.Constructor=h;b(function(){b("body").on("click.modal.data-api",'[data-toggle="modal"]',function(a){var c=b(this),e,d=b(c.attr("data-target")|| (e=c.attr("href"))&&e.replace(/.*(?=#[^\s]+$)/,"")),c=d.data("modal")?"toggle":b.extend({},d.data(),c.data());a.preventDefault();d.modal(c)})})}(window.jQuery); !function(b){var d=function(a,c){this.init("tooltip",a,c)};d.prototype={constructor:d,init:function(a,c,e){this.type=a;this.$element=b(c);this.options=this.getOptions(e);this.enabled=!0;"manual"!=this.options.trigger&&(a="hover"==this.options.trigger?"mouseenter":"focus",c="hover"==this.options.trigger?"mouseleave":"blur",this.$element.on(a,this.options.selector,b.proxy(this.enter,this)),this.$element.on(c,this.options.selector,b.proxy(this.leave,this)));this.options.selector?this._options=b.extend({}, this.options,{trigger:"manual",selector:""}):this.fixTitle()},getOptions:function(a){a=b.extend({},b.fn[this.type].defaults,a,this.$element.data());a.delay&&"number"==typeof a.delay&&(a.delay={show:a.delay,hide:a.delay});return a},enter:function(a){var c=b(a.currentTarget)[this.type](this._options).data(this.type);if(!c.options.delay||!c.options.delay.show)return c.show();clearTimeout(this.timeout);c.hoverState="in";this.timeout=setTimeout(function(){"in"==c.hoverState&&c.show()},c.options.delay.show)}, leave:function(a){var c=b(a.currentTarget)[this.type](this._options).data(this.type);this.timeout&&clearTimeout(this.timeout);if(!c.options.delay||!c.options.delay.hide)return c.hide();c.hoverState="out";this.timeout=setTimeout(function(){"out"==c.hoverState&&c.hide()},c.options.delay.hide)},show:function(){var a,c,b,d,i,g,f;if(this.hasContent()&&this.enabled){a=this.tip();this.setContent();this.options.animation&&a.addClass("fade");g="function"==typeof this.options.placement?this.options.placement.call(this, a[0],this.$element[0]):this.options.placement;c=/in/.test(g);a.remove().css({top:0,left:0,display:"block"}).appendTo(c?this.$element:document.body);b=this.getPosition(c);d=a[0].offsetWidth;i=a[0].offsetHeight;switch(c?g.split(" ")[1]:g){case "bottom":f={top:b.top+b.height,left:b.left+b.width/2-d/2};break;case "top":f={top:b.top-i,left:b.left+b.width/2-d/2};break;case "left":f={top:b.top+b.height/2-i/2,left:b.left-d};break;case "right":f={top:b.top+b.height/2-i/2,left:b.left+b.width}}a.css(f).addClass(g).addClass("in")}}, isHTML:function(a){return"string"!=typeof a||"<"===a.charAt(0)&&">"===a.charAt(a.length-1)&&3<=a.length||/^(?:[^<]*<[\w\W]+>[^>]*$)/.exec(a)},setContent:function(){var a=this.tip(),c=this.getTitle();a.find(".tooltip-inner")[this.isHTML(c)?"html":"text"](c);a.removeClass("fade in top bottom left right")},hide:function(){var a=this.tip();a.removeClass("in");if(b.support.transition&&this.$tip.hasClass("fade")){var c=setTimeout(function(){a.off(b.support.transition.end).remove()},500);a.one(b.support.transition.end, function(){clearTimeout(c);a.remove()})}else a.remove()},fixTitle:function(){var a=this.$element;if(a.attr("title")||"string"!=typeof a.attr("data-original-title"))a.attr("data-original-title",a.attr("title")||"").removeAttr("title")},hasContent:function(){return this.getTitle()},getPosition:function(a){return b.extend({},a?{top:0,left:0}:this.$element.offset(),{width:this.$element[0].offsetWidth,height:this.$element[0].offsetHeight})},getTitle:function(){var a=this.$element,c=this.options;return a.attr("data-original-title")|| ("function"==typeof c.title?c.title.call(a[0]):c.title)},tip:function(){return this.$tip=this.$tip||b(this.options.template)},validate:function(){this.$element[0].parentNode||(this.hide(),this.options=this.$element=null)},enable:function(){this.enabled=!0},disable:function(){this.enabled=!1},toggleEnabled:function(){this.enabled=!this.enabled},toggle:function(){this[this.tip().hasClass("in")?"hide":"show"]()}};b.fn.tooltip=function(a){return this.each(function(){var c=b(this),e=c.data("tooltip"), h="object"==typeof a&&a;e||c.data("tooltip",e=new d(this,h));if("string"==typeof a)e[a]()})};b.fn.tooltip.Constructor=d;b.fn.tooltip.defaults={animation:!0,placement:"top",selector:!1,template:'<div class="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>',trigger:"hover",title:"",delay:0}}(window.jQuery); !function(b){var d=function(a,c){this.init("popover",a,c)};d.prototype=b.extend({},b.fn.tooltip.Constructor.prototype,{constructor:d,setContent:function(){var a=this.tip(),c=this.getTitle(),b=this.getContent();a.find(".popover-title")[this.isHTML(c)?"html":"text"](c);a.find(".popover-content > *")[this.isHTML(b)?"html":"text"](b);a.removeClass("fade top bottom left right in")},hasContent:function(){return this.getTitle()||this.getContent()},getContent:function(){var a=this.$element,b=this.options; return a.attr("data-content")||("function"==typeof b.content?b.content.call(a[0]):b.content)},tip:function(){this.$tip||(this.$tip=b(this.options.template));return this.$tip}});b.fn.popover=function(a){return this.each(function(){var c=b(this),e=c.data("popover"),h="object"==typeof a&&a;e||c.data("popover",e=new d(this,h));if("string"==typeof a)e[a]()})};b.fn.popover.Constructor=d;b.fn.popover.defaults=b.extend({},b.fn.tooltip.defaults,{placement:"right",content:"",template:'<div class="popover"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>'})}(window.jQuery);
+!function(c){var h=function(b,a){this.options=c.extend({},c.fn.affix.defaults,a);this.$window=c(window).on("scroll.affix.data-api",c.proxy(this.checkPosition,this));this.$element=c(b);this.checkPosition()};h.prototype.checkPosition=function(){if(this.$element.is(":visible")){var b=c(document).height(),a=this.$window.scrollTop(),e=this.$element.offset(),d=this.options.offset,f=d.bottom,g=d.top;"object"!=typeof d&&(f=g=d);"function"==typeof g&&(g=d.top());"function"==typeof f&&(f=d.bottom());b=null!= this.unpin&&a+this.unpin<=e.top?!1:null!=f&&e.top+this.$element.height()>=b-f?"bottom":null!=g&&a<=g?"top":!1;this.affixed!==b&&(this.affixed=b,this.unpin="bottom"==b?e.top-a:null,this.$element.removeClass("affix affix-top affix-bottom").addClass("affix"+(b?"-"+b:"")))}};c.fn.affix=function(b){return this.each(function(){var a=c(this),e=a.data("affix"),d="object"==typeof b&&b;e||a.data("affix",e=new h(this,d));if("string"==typeof b)e[b]()})};c.fn.affix.Constructor=h;c.fn.affix.defaults={offset:0}; c(window).on("load",function(){c('[data-spy="affix"]').each(function(){var b=c(this),a=b.data();a.offset=a.offset||{};a.offsetBottom&&(a.offset.bottom=a.offsetBottom);a.offsetTop&&(a.offset.top=a.offsetTop);b.affix(a)})})}(window.jQuery);
+
+Array.prototype.forEach||(Array.prototype.forEach=function(c,d){var e,a;if(null==this)throw new TypeError(" this is null or not defined");var b=Object(this),g=b.length>>>0;if("function"!==typeof c)throw new TypeError(c+" is not a function");d&&(e=d);for(a=0;a<g;){var f;a in b&&(f=b[a],c.call(e,f,a,b));a++}});
+
+
+//model - none so far - use access db
+var POP2040 = 6261673;
+var HOUSE2040 = 2415179;
+
+var d = {};
+var model2010 = {active:false};
+
+$(function() {
+	// +/- expand
+	$('.view h2+div, .view h3+div').hide().prev('h2, h3').addClass('plus').click(function() {
+		$(this).toggleClass('minus').next('div').slideToggle();
+	});
+
+
+	function convertToFixed(el) {
+		if (el == 'undefined') el = this;
+		$(el).css('width','');
+		$(el).width($(el).outerWidth());
+	}
+	function sizeGallery() {
+		//179 total width
+		//x0.489362 column width
+		//x2.25 two row height
+		var parent = $('#tall').closest('.span4');
+		var src = parent.siblings().filter(function() { return $(this).width() == parent.width(); }).eq(0);
+		var heights = src.find('.row-fluid').map(function() { return $(this).height() }).get();
+		var height = -6;
+		var n = heights.length;
+		while (n--)
+			height+=heights[n];
+		$('#tall').height(height);
+		$('#short').height(height*0.6489);
+	}
+	
+///////////////////////////////////////
+	ko.bindingHandlers.emphasize = {
+		init: function(element, valueAccessor) {
+			$(element).hide();
+		},
+		update: function(element, valueAccessor, allBindingsAccessor) {
+			// First get the latest data that we're bound to
+			var value = valueAccessor(), allBindings = allBindingsAccessor();
+
+			// Next, whether or not the supplied model property is observable, get its current value
+			var valueUnwrapped = ko.utils.unwrapObservable(value);
+
+			// Grab some more data from another binding property
+			var duration = allBindings.slideDuration || 400; // 400ms is default duration unless otherwise specified
+
+			// Now manipulate the DOM element
+			if (valueUnwrapped == true)
+				$(element).slideDown(function() {
+					$(".total").effect("transfer", { to: $(this) }, 1000);
+				});
+			else
+				$(element).slideUp(duration);   // Make the element invisible
+		}
+	};
+
+		ko.bindingHandlers.fadeVisible = {
+		init: function(element, valueAccessor) {
+			$(element).hide();
+		},
+		update: function(element, valueAccessor, allBindingsAccessor) {
+			// First get the latest data that we're bound to
+			var value = valueAccessor(), allBindings = allBindingsAccessor();
+
+			// Next, whether or not the supplied model property is observable, get its current value
+			var valueUnwrapped = ko.utils.unwrapObservable(value);
+
+			// Grab some more data from another binding property
+			var duration = allBindings.slideDuration || 400; // 400ms is default duration unless otherwise specified
+
+			// Now manipulate the DOM element
+			if (valueUnwrapped == true)
+				$(element).fadeIn(duration); // Make the element visible
+			else
+				$(element).fadeOut(duration);   // Make the element invisible
+		}
+	};
+
+	ko.bindingHandlers.scrollTo = {
+		init: function(element, valueAccessor) {
+			//$(element).hide();
+		},
+		update: function(element, valueAccessor, allBindingsAccessor) {
+			// First get the latest data that we're bound to
+			var value = valueAccessor(), allBindings = allBindingsAccessor();
+
+			// Next, whether or not the supplied model property is observable, get its current value
+			var valueUnwrapped = ko.utils.unwrapObservable(value);
+
+			// Grab some more data from another binding property
+			var duration = allBindings.slideDuration || 400; // 400ms is default duration unless otherwise specified
+
+			// Now manipulate the DOM element
+			if (valueUnwrapped == true)
+				$('html,body').animate({scrollTop: $(element).offset().top},'slow'); // Make the element visible
+			//else
+				//$(element).fadeOut(duration);   // Make the element invisible
+		}
+	};
+
+	ko.extenders.percent = function(target, precision) {
+		var result = ko.dependentObservable({
+			read: function() {
+			   return (target() * 100).toFixed(precision)+'%';
+			},
+			write: target
+		});
+
+		result.raw = target;
+		return result;
+	};
+
+	//flexible formatter for numbers
+	ko.extenders.numeric = function(target, opts) {
+		var settings = {
+			commas: false,
+			decimals: -1,
+			precision: -1,
+			roundTo: -1,
+			prefix: '',
+			postfix: '',
+			multiplier: 1
+		};
+		if (opts) $.extend(settings, opts);
+		var result = ko.dependentObservable({
+			read: function() {
+				var result = target()*settings.multiplier;
+				if (settings.decimals > -1) {
+					result = result.toFixed(settings.decimals);
+				}
+				else if (settings.precision > -1) {
+					result = Math.round(Number(result).toPrecision(settings.precision));//result.toPrecision(settings.precision);
+				}
+				else if (settings.roundTo > -1) {
+					var len = Math.round(result).toString().length - settings.roundTo.toString().length;
+					if (len < 0) len = 0;
+					result = Math.round(Number(result).toPrecision(len+1));
+				}
+				if (settings.commas){
+					result += '';
+					x = result.split('.');
+					x1 = x[0];
+					x2 = x.length > 1 ? '.' + x[1] : '';
+					var rgx = /(\d+)(\d{3})/;
+					while (rgx.test(x1)) {
+						x1 = x1.replace(rgx, '$1' + ',' + '$2');
+					}
+					result = x1 + x2;
+				}
+				return settings.prefix + result + settings.postfix;
+			},
+			write: target
+		});
+
+		result.raw = target;
+		return result;
+	};
+
+	window.toObject = function(viewModel) {
+		var obj = {};
+		for(var prop in viewModel) {
+			if (viewModel.hasOwnProperty(prop)) {
+				if (ko.isObservable(viewModel[prop]))
+					if (viewModel[prop].hasOwnProperty('raw'))
+						obj[prop] = viewModel[prop].raw();
+					else
+						obj[prop] = viewModel[prop]();
+			}
+		}
+		return obj;
+	};
+
+
+
+	window.viewModel = {
+		//add all inputs here
+		housing: ko.observable('2010'),
+		dev: ko.observable('0'),
+		taxtype: ko.observableArray([]),
+		taxamount: ko.observable(0).extend({numeric:{roundTo:10}}),
+		mroad: ko.observable(30.6),
+		taxes: ko.observable('H'),
+		mtransit: ko.observable(17.5),
+		mbikeped: ko.observable(0),
+		mfreq: ko.observable(0),
+		transitfirst: ko.observable(false),
+		enhance: ko.observable(0),
+		//expand: ko.observable(1),
+		newdev: ko.observable(0),
+		newtransit: ko.observableArray([]),
+		peakVMT: ko.observable(1),
+		peakVMTFactor: ko.observable(1),
+		GHGFactor: ko.observable(1),
+		BikePedRaw: ko.observable(0),
+		transitFactor: ko.observable(1),
+		newRiders: ko.observable(1),
+		is2010: ko.observable(true),
+		submitted: ko.observable(false),
+
+		//data
+		data: ko.observable({}),
+		max: ko.observable(48.0),
+		spending: ko.observable(0),
+        transitSpending: ko.observable(0),
+
+		//add all indicators here
+		Acres: ko.observable(0).extend({numeric:{commas:true,decimals:0,precision:4}}),
+		VMT: ko.observable(0).extend({numeric:{roundTo:10, commas:true}}),
+		Transit: ko.observable(0).extend({numeric:{commas:true,decimals:0, precision:4}}),
+		BikePed: ko.observable(0).extend({numeric:{commas:true,decimals:0, precision:4}}),
+		Congestion: ko.observable(0).extend({numeric:{decimals:1}}),
+		Costs: ko.observable(0).extend({numeric:{roundTo:10, prefix:'$', commas:true}}),
+		RoadCon: ko.observable(0).extend({numeric:{decimals:1,multiplier:100,postfix:'%'}}),
+		TransitCon: ko.observable(0).extend({numeric:{decimals:1,multiplier:100,postfix:'%'}}),
+		Safety: ko.observable(0).extend({numeric:{decimals:1}}),
+		GHG: ko.observable(0).extend({numeric:{decimals:1}}),
+
+		//functions
+		views: ['Introduction','How Should<br/>We Grow?','Transportation<br/>Funding','Transportation<br/>Projects','Results'],
+		selectedView: ko.observable('Introduction'),
+		indicators: ['Acres','VMT','BikePed','Transit','Costs','Congestion','GHG','Safety']
+
+	};
+	window.model2010 = {
+		Acres: ko.observable(1085600).extend({numeric:{commas:true,decimals:0,precision:4}}),
+		VMT: ko.observable(7340).extend({numeric:{roundTo:10, commas:true}}),
+		Transit: ko.observable(64).extend({numeric:{commas:true,decimals:0, precision:4}}),
+		BikePed: ko.observable(100.061637500567).extend({numeric:{commas:true,decimals:0, precision:4}}),
+		Congestion: ko.observable(21.8166907417988).extend({numeric:{decimals:1}}),
+		Costs: ko.observable(13681).extend({numeric:{roundTo:10, prefix:'$', commas:true}}),
+		RoadCon: ko.observable(0.213).extend({numeric:{decimals:1,multiplier:100,postfix:'%'}}),
+		TransitCon: ko.observable(0.3).extend({numeric:{decimals:1,multiplier:100,postfix:'%'}}),
+		Safety: ko.observable(7.1).extend({numeric:{decimals:1}}),
+		GHG: ko.observable(7.64522066399765).extend({numeric:{decimals:1}})
+	};
+
+	window.avgModel = {
+			Acres: ko.observable(1085600).extend({numeric:{commas:true,decimals:0,precision:4}}),
+			VMT: ko.observable(7340).extend({numeric:{roundTo:10, commas:true}}),
+			Transit: ko.observable(64).extend({numeric:{commas:true,decimals:0, precision:4}}),
+			BikePed: ko.observable(100.061637500567).extend({numeric:{commas:true,decimals:0, precision:4}}),
+			Congestion: ko.observable(21.8166907417988).extend({numeric:{decimals:1}}),
+			Costs: ko.observable(13070).extend({numeric:{roundTo:10, prefix:'$', commas:true}}),
+			RoadCon: ko.observable(0.213).extend({numeric:{decimals:1,multiplier:100,postfix:'%'}}),
+			TransitCon: ko.observable(0.3).extend({numeric:{decimals:1,multiplier:100,postfix:'%'}}),
+			Safety: ko.observable(7.1).extend({numeric:{decimals:1}}),
+			GHG: ko.observable(7.64522066399765).extend({numeric:{decimals:1}})
+	};
+
+	ko.computed(function() {
+		$.getJSON('script.aspx', {avg:true}, function(data) {
+			var data = data.rows[0];
+			for (indicator in data) {
+				avgModel[indicator](data[indicator]);
+			}
+		});
+	}, avgModel);
+
+	ko.computed(function() {
+		this.housing();
+		sizeGallery();
+	},viewModel);
+
+	viewModel.enhance.push = function(newValue) {
+		if (newValue == 'majorITS') this.enhance.remove('regionalITS');
+		if (newValue == 'regionalITS') this.enhance.remove('majorITS');
+		if (newValue == 'incTransit10') this.enhance.remove('incTransit25');
+		if (newValue == 'incTransit25') this.enhance.remove('incTransit10');
+		ko.observableArray.fn.push.call(this.enhance, newValue);
+	}.bind(viewModel);
+
+	viewModel.selectView = ko.computed(function() {
+		$('.view').hide().filter('[data-title="'+this.selectedView()+'"]').fadeIn(function() {
+			if ($('.view:visible').offset().top+$('html,body').offset().top < 0) $('html,body').animate({scrollTop: $(this).offset().top},'slow');
+			$('.view:visible').trigger('visible');
+		});
+	}, viewModel);
+
+	ko.computed(function() {
+	if (this.selectedView() == "How Should<br/>We Grow?" && (this.housing() == '2010' || this.dev() == '0'))
+		$('#second .button').addClass('hide');
+	else
+		$('#second .button').removeClass('hide');
+	if (this.selectedView() == "Transportation<br/>Funding" && this.taxes() == 'H')
+		$('#four .button').addClass('hide');
+	else
+		$('#four .button').removeClass('hide');
+	}, viewModel);
+
+	//add all outputs here
+
+	//GET NEW DATA FROM TABLE
+	ko.computed(function() {
+		var $this = this;
+		$.getJSON('script.aspx', {scenario: this.housing(), density: this.dev()}, function(data) {
+			var d = {};
+			for (var i in data.rows[0]) {
+				d[i] = isNaN(data.rows[0][i])? data.rows[0][i] : parseFloat(data.rows[0][i]);
+			}
+			$this.data(d);
+			if (data.rows[0].conc.substring(0, 5) !== '20100') $this.is2010(false);
+			//console.log('data', $this.data());
+		});
+	}, viewModel);
+
+	//UPDATE MULTIPLIERS
+	viewModel.capacity = {};
+	viewModel.capacity.newRiders = ko.computed(function() {
+		var annual = {
+			"BerksRR": 889700,
+			"QuakertownRR": 1612000,
+			"AtglenRR": 155000,
+			"WawaRR": 248000,
+			"NorristownHSL": 951700,
+			"DelawareAveRR": 1519000,
+			"NavyYardBSS": 2480000,
+			"CulturalConnector": 1187300,
+			"NJ42BRT": 1984000,
+			"SouthamptonBRT": 3840280,
+			"PATCO": 8029000,
+			"US1BRT": 5766000,
+			"WestTrenton": 310000
+		}, result = 0;
+		$.each(this.newtransit(), function() {
+			result += annual[this];
+		});
+		return result/POP2040;
+	}, viewModel);
+
+
+	viewModel._transitService = ko.computed(function() {
+		return 0.00009 * this.mfreq() * this.mfreq() + 0.0095 * this.mfreq(); //Transit Service Frequency ($) slider
+	}, viewModel);
+	viewModel.multipliers = {};
+	viewModel.multipliers.bikePed = ko.computed(function() {
+		return this.mbikeped() > 0 ? Math.pow(1.00095,  this.mbikeped() * 1250 / 112) : 1;
+	}, viewModel);
+	viewModel.multipliers.VMT = ko.computed(function() {
+		return (0.97*Math.pow(this.RoadCon.raw(), -0.02))
+			* Math.pow(1.0016, (1 - 0.97*Math.pow(this.TransitCon.raw(), -0.02)) * 100)
+			* Math.pow(1.0016, (1 - this.multipliers.bikePed())*100)
+			* Math.pow(1.0016, (1 - (this.transitfirst() ? 1.09 : 1)) * 100)
+			* Math.pow(1.0016, (1 - Math.pow(1.005, 100 * this._transitService())) * 100)
+			* Math.pow(1.00101, (this.newdev()<=1.6 ? 1583250 * this.newdev() / 1.6 : 1583250 + 2257373 * (this.newdev() - 1.6) / 0.9) * 100 / (103075456.455424 - 1583250 - 2257373))
+			* Math.pow(1.0016, (1 - ((this.capacity.newRiders() + this.Transit.raw())/this.Transit.raw()))*100);
+	}, viewModel);
+	viewModel.multipliers.transit = ko.computed(function() {
+		return Math.pow(1.003, (1- (0.97*Math.pow(this.RoadCon.raw(), -0.02))) * 100)
+			* (0.97*Math.pow(this.TransitCon.raw(), -0.02))
+			* Math.pow(1.0083, (1 - this.multipliers.bikePed()) * 100)
+			* (this.transitfirst() ? 1.09 : 1)
+			* Math.pow(1.005, 100 * this._transitService())
+			* Math.pow(1.0624, (1 - Math.pow(1.00101, (this.newdev()<=1.6 ? 1583250 * this.newdev() / 1.6 : 1583250 + 2257373 * (this.newdev() - 1.6) / 0.9) * 100 / (103075456.455424 - 1583250 - 2257373))) * 100);
+	}, viewModel);
+	viewModel.multipliers.frequency = ko.computed(function() {
+		var $this = this;
+		return {I: -0.08, A: -0.41, B: -0.08, C: -0.16, D: -0.08, E: 0, F: -0.04, G: -0.01, H: -0.01};
+	}, viewModel);
+	viewModel.multipliers.tripLength = ko.computed(function() {
+		var $this = this;
+		return {I: -0.23, A: -0.15, B: -0.26, C: -0.45, D: -0.23, E: 0, F: 0, G: -0.03, H: -0.03};
+	}, viewModel);
+	viewModel.multipliers.transitRidership = ko.computed(function() {
+		var $this = this;
+		return {I: 0, A: 0, B: 0, C: 0, D: 0, E: -0.9, F: 0, G: -0.003, H: -0.003};
+	}, viewModel);
+	viewModel.multipliers.other = ko.computed(function() {
+		var $this = this;
+		return {I: -0.47, A: -0.33, B: -0.08, C: 0, D: -0.47, E: 0, F: 0, G: 0, H: 0};
+	}, viewModel);
+	viewModel.multipliers.baseVMT = ko.computed(function() {
+		var $this = this;
+		return ($this.data()['peak']*$this.data()['peak_veh_trip'] + $this.data()['off_peak']*$this.data()['off_peak_veh_trip']) * 365 * POP2040 / HOUSE2040;
+	}, viewModel);
+	viewModel.multipliers.baseTransitCost = ko.computed(function() {
+		var $this = this;
+		return $this.data()['transit'] * POP2040 / HOUSE2040 * 1.52107696491705;
+	}, viewModel);
+	viewModel.multipliers.totalCost = ko.computed(function() {
+		var $this = this;
+		return $this.data()['vehicle_ownership_cost'] + $this.multipliers.baseVMT() * 0.462;
+	}, viewModel);
+
+	viewModel.multipliers.amount = ko.computed(function() {
+		var $this = this;
+		return 1;
+	}, viewModel);
+
+	//UPDATE TAX MULTIPLIERS
+	viewModel.taxMultipliers = {};
+	viewModel.taxMultipliers.amount = ko.computed(function() {
+		var $this = this,
+			result = {},
+			l = $this.taxtype().length,
+			t = $this.taxamount();
+		$.each($this.taxtype(), function(k, v) {
+			result[v] = t/l;
+		});
+		return result;
+	}, viewModel);
+	viewModel.taxMultipliers.frequency = ko.computed(function() {
+		var $this = this,
+			result = {};
+		$.each($this.taxMultipliers.amount(), function(k,v) {
+			result[k] = Math.pow(1 + $this.multipliers.frequency()[k] / 100, 100 * v / (($.inArray(v, ['G','H'])>-1 ? $this.multipliers.baseTransitCost() : 0) + $this.multipliers.totalCost()));
+		});
+		return result;
+	}, viewModel);
+	viewModel.taxMultipliers.tripLength = ko.computed(function() {
+		var $this = this,
+			result = {};
+		$.each($this.taxMultipliers.amount(), function(k,v) {
+			result[k] = Math.pow(1 + $this.multipliers.tripLength()[k] / 100, 100 * v / (($.inArray(v, ['G','H'])>-1 ? $this.multipliers.baseTransitCost() : 0) + $this.multipliers.totalCost()));
+		});
+		return result;
+	}, viewModel);
+	viewModel.taxMultipliers.transitRidership = ko.computed(function() {
+		var $this = this,
+			result = {};
+		$.each($this.taxMultipliers.amount(), function(k,v) {
+			result[k] = Math.pow(1 + $this.multipliers.transitRidership()[k] / 100, 100 * v / (($.inArray(v, ['E','G','H'])>-1 ? $this.multipliers.baseTransitCost() : 0) + $this.multipliers.totalCost()));
+		});
+		return result;
+	}, viewModel);
+	viewModel.taxMultipliers.other = ko.computed(function() {
+		var $this = this,
+			result = {};
+		$.each($this.taxMultipliers.amount(), function(k,v) {
+			result[k] = Math.pow(1 + $this.multipliers.other()[k] / 100, 100 * v / $this.multipliers.totalCost());
+		});
+		return result;
+	}, viewModel);
+
+	//UPDATE REASSIGNMENT
+	viewModel.reassign = {};
+	viewModel.reassign._totalFrequency = ko.computed(function() {
+		var $this = this,
+			result = 1;
+		$.each($this.taxMultipliers.frequency(), function(k,v) {
+			result *= v;
+		});
+
+		return result;
+	}, viewModel);
+	viewModel.reassign._baselinePeak = ko.computed(function() {
+		var $this = this;
+		return [POP2040 * $this.data()['peak'], $this.data()['transit'] * POP2040 / 310];
+	}, viewModel);
+	viewModel.reassign._totalTransitRidership = ko.computed(function() {
+		var $this = this,
+			result = 1;
+		$.each($this.taxMultipliers.transitRidership(), function(k,v) {
+			result *= v;
+		});
+		return result;
+	}, viewModel);
+	viewModel.reassign._reassignedPeak = ko.computed(function() {
+		var $this = this,
+			reassignedPeak = ($this.reassign._baselinePeak()[0] - $this.reassign._baselinePeak()[0] * $this.reassign._totalFrequency() * ($.inArray('A', $this.taxtype()) > -1 ? Math.pow(1 + $this.multipliers.other()['A'] / 100, 100 * $this.taxamount() / $this.taxtype().length / $this.multipliers.totalCost()) : 1)) * 0.67,
+			reassignedTransit = ($this.reassign._baselinePeak()[1] - $this.reassign._baselinePeak()[1] * $this.reassign._totalTransitRidership()) * 0.67;
+		return [reassignedPeak, reassignedTransit];
+	}, viewModel);
+	viewModel.reassign._baselineOffPeak = ko.computed(function() {
+		var $this = this;
+		return $this.data()['off_peak'] * POP2040;
+	}, viewModel);
+	viewModel.reassign._revisedOffPeak = ko.computed(function() {
+		var $this = this;
+		return $this.reassign._baselineOffPeak() * $this.reassign._totalFrequency() + $this.reassign._baselinePeak()[0] * (1 - Math.pow(1 + $this.multipliers.other()['A'] / 100, 100 * ($.inArray('A', $this.taxtype()) > -1 ? $this.taxamount()/$this.taxtype().length : 0) / $this.multipliers.totalCost()));
+	}, viewModel);
+	viewModel.reassign._reassignedOffPeak = ko.computed(function() {
+		var $this = this;
+		return ($this.reassign._baselineOffPeak() - $this.reassign._revisedOffPeak()) * 0.67;
+	}, viewModel);
+
+	viewModel.reassign._calc = function (a, b, offPeak) {
+		var $this = this;
+		return ($this.reassign._reassignedPeak()[0] + (offPeak ? $this.reassign._reassignedOffPeak() : 0)) * a + $this.reassign._reassignedPeak()[1] * b;
+	}.bind(viewModel);
+	viewModel.reassign.peakDriver = ko.computed(function() {
+		var $this = this;
+		return $this.reassign._calc(0, 0.40286909766322);
+	}, viewModel);
+	viewModel.reassign.offPeakDriver = ko.computed(function() {
+		var $this = this;
+		return $this.reassign._calc(0, 0.285796026547413);
+	}, viewModel);
+	viewModel.reassign.peakPassenger = ko.computed(function() {
+		var $this = this;
+		return $this.reassign._calc(0.676281514777855, 0.241032793473721, true);
+	}, viewModel);
+	viewModel.reassign.transit = ko.computed(function() {
+		var $this = this;
+		return $this.reassign._calc(0.126467322692487, 0, true);
+	}, viewModel);
+	viewModel.reassign.bikePed = ko.computed(function() {
+		var $this = this;
+		return $this.reassign._calc(0.197251162529658, 0.0703020823156461, true);
+	}, viewModel);
+	viewModel.reassign.annualBikePed = ko.computed(function() {
+		var $this = this;
+		return $this.reassign.bikePed() * 365 / POP2040;
+	}, viewModel);
+
+	//UPDATE ACRES
+	ko.computed(function () {
+		var $this = this;
+		$this.Acres($this.data()['total_acres_developed']);
+	}, viewModel);
+
+	//UPDATE VMT
+	viewModel._totalTripLength = ko.computed(function () {
+		var $this = this,
+			result = 1;
+		$.each($this.taxMultipliers.tripLength(), function(k,v) {
+			result *= v;
+		});
+		return result;
+	}, viewModel);
+	viewModel._peakVMT = ko.computed(function () {
+		var $this = this,
+			peakTrips = ($this.reassign._baselinePeak()[0] * $this.reassign._totalFrequency() * (isNaN($this.taxMultipliers.other()['A']) ? 1 : $this.taxMultipliers.other()['A']) + $this.reassign.peakDriver()) / POP2040,
+			peakLength = $this.data()['peak_veh_trip'] * $this._totalTripLength(),
+			newRidership = Math.pow(0.9984, $this.capacity.newRiders() / $this.data()['transit'] * 100);
+		return peakTrips * peakLength * newRidership * $this.multipliers.VMT();
+	}, viewModel);
+
+	viewModel._offPeakVMT = ko.computed(function () {
+		var $this = this,
+			offPeakTrips = (($this.reassign._baselineOffPeak() * $this.reassign._totalFrequency() + $this.reassign._baselinePeak()[0] * (1 - (isNaN($this.taxMultipliers.other()['A']) ? 1 : $this.taxMultipliers.other()['A']))) + $this.reassign.offPeakDriver()) / POP2040,
+			offPeakLength = $this.data()['off_peak_veh_trip'] * $this._totalTripLength(),
+			newRidership = Math.pow(0.9984, $this.capacity.newRiders() / $this.data()['transit'] * 100);
+		return offPeakTrips * offPeakLength * newRidership * $this.multipliers.VMT();
+	}, viewModel);
+
+	ko.computed(function () {
+		var $this = this;
+		$this.VMT(($this._peakVMT() + $this._offPeakVMT()) * 365);
+	}, viewModel);
+
+	//UPDATE COSTS
+	ko.computed(function () {
+		var $this = this,
+			resEnergy = $this.data()['residential_energy'],
+			vehicleOwn = $this.data()['vehicle_ownership_cost'],
+			vehicleOps = 0.462 * (1 + ( 0.5016 * $this.RoadCon.raw() - 0.1106)),
+			transitRidership = $this.Transit.raw() * 1.52107696491705 * POP2040 / HOUSE2040,
+			stateTaxes = 0,
+			transTaxes = parseInt($this.taxamount());
+		$this.Costs(resEnergy + vehicleOwn + vehicleOps * $this.VMT.raw() * POP2040 / HOUSE2040 + transitRidership + stateTaxes + transTaxes);
+	}, viewModel);
+
+	//UPDATE GHG EMISSIONS
+	ko.computed(function () {
+		var $this = this,
+			_baselineTransitGHG = 0.27 + (0.1598 * $this.TransitCon.raw() - 0.0483),
+			_newCapacityGHG = 0.08 * ($.grep($this.newtransit(), function(v,k) { return $.inArray(v, ['CulturalConnector','QuakertownRR','WawaRR','DelawareAveRR','NorristownHSL','AtglenRR','NavyYardBSS','BerksRR','PATCO','WestTrenton']) > -1; }).length) / 29 + ($.inArray('SouthamptonBRT', $this.newtransit())>-1 ? 0.27*40/1678 : 0)+($.inArray('US1BRT', $this.newtransit())>-1 ? 0.27*130/1678 : 0)+($.inArray('NJ42BRT', $this.newtransit())>-1 ? 0.3782/1678 : 0),
+			transitGHG = _baselineTransitGHG * (1 + $this._transitService()) + _newCapacityGHG,
+			vehicleGHG = $this.VMT.raw() * POP2040 * 0.00054232386295 * 0.000001
+				* (isNaN($this.taxMultipliers.other()['I']) ? 1 : $this.taxMultipliers.other()['I'])
+				* (isNaN($this.taxMultipliers.other()['D']) ? 1 : $this.taxMultipliers.other()['D']),
+			resEnergyGHG = $this.data()['residential_energy_co2'];
+		$this.GHG((transitGHG + vehicleGHG + resEnergyGHG) * 1000000 / POP2040);
+	}, viewModel);
+
+	//UPDATE TRANSIT RIDERSHIP
+	ko.computed(function () {
+		var $this = this;
+		$this.Transit((($this.reassign._baselinePeak()[1] * $this.reassign._totalTransitRidership() + $this.reassign.transit())*310/POP2040 + $this.capacity.newRiders()) * $this.multipliers.transit());
+	}, viewModel);
+
+	//UPDATE BIKE PED
+	ko.computed(function () {
+		var $this = this;
+		$this.BikePed(($this.data()['nonmotorized_trips'] + $this.reassign.annualBikePed()) * $this.multipliers.bikePed());
+	}, viewModel);
+
+	//UPDATE CONGESTION
+	ko.computed(function () {
+		var $this = this,
+			_peakVMT = $this._peakVMT() * POP2040,
+			_peakVC =  _peakVMT / (103075456.455424 - 1583250 - 2257373 + (this.newdev()<=1.6 ? 1583250 * this.newdev() / 1.6 : 1583250 + 2257373 * (this.newdev() - 1.6) / 0.9)),
+			_peakSpeed = (-29.409 * _peakVC + 41.379)*(this.transitfirst() ? 29.1/29.2 : 1),
+			totalDelay = 250 * (_peakVMT / _peakSpeed - _peakVMT / 36.3531517692894),
+			conditionalDelay = Math.exp(-0.3186 * $this.mroad() + 19.009) * 365,
+			operationalDelay = 0.002872 * $this.enhance() * $this.enhance() - 0.05097 * $this.enhance() + 1.07;
+		$this.Congestion((totalDelay * operationalDelay + conditionalDelay) / POP2040);
+	}, viewModel);
+
+	//UPDATE SAFETY
+	ko.computed(function () {
+		var $this = this;
+		$this.Safety(($this._peakVMT() * POP2040 * 365 * 0.95 + $this._offPeakVMT() * POP2040 * 365 * 1.03) * 0.001 / POP2040);
+	}, viewModel);
+
+	//UPDATE ROAD CONDITION
+	ko.computed(function () {
+		var $this = this;
+		$this.RoadCon(75.515 * Math.pow($this.mroad(), -1.672));
+	}, viewModel);
+
+	//UPDATE TRANSIT CONDITION
+	ko.computed(function () {
+		var $this = this;
+		$this.TransitCon(-0.0218 * $this.mtransit() + 0.7379);
+	}, viewModel);
+
+	ko.computed(function () {
+		var $this = this;
+	}, viewModel);
+
+	//UPDATE FUNDING
+    ko.computed(function () {
+		var $this = this,
+		result = 0,
+		costs = {"WestTrenton":0.2, "US1BRT":0.4, "PATCO":2.4, "SouthamptonBRT":0.2, "NJ42BRT":0.1, "CulturalConnector":0.5, "NavyYardBSS":0.9, "DelawareAveRR":1.3, "NorristownHSL":0.5, "WawaRR":0.1, "BerksRR":1, "AtglenRR":0.1, "QuakertownRR":0.3
+			};
+		$.each($this.newtransit(), function(i, v) {
+			result += costs[v];
+		});
+		$this.transitSpending(result);
+	}, viewModel);
+
+	ko.computed(function () {
+		var $this = this,
+			result = $this.mroad() + $this.mtransit() + $this.enhance() + $this.mbikeped() + $this.mfreq() + $this.newdev() + $this.transitSpending();
+		$this.max(59 + $this.taxamount() * 2266609 * 27 * 0.000000001 * Math.pow(1.03, 13.5));
+		$this.spending(result);
+	}, viewModel);
+
+	viewModel.remaining = ko.computed(function () {
+		var $this = this;
+		return $this.max() - $this.spending();
+	}, viewModel);
+
+
+	function PercentOfIdeal(prop) {
+		if (!this.hasOwnProperty(prop)) return '';
+		var val = this[prop].raw();
+		if (prop == 'TransitCon' || prop == 'RoadCon') var result = Math.round((val - model2010[prop].raw())*100)+'%';
+		else var result = isNaN(val)||isNaN(model2010[prop].raw()) ? '0%' : Math.round((val / model2010[prop].raw() - 1)*100)+'%';
+		return result;
+	}
+
+	viewModel.PercentOfIdeal = PercentOfIdeal.bind(viewModel);
+	avgModel.PercentOfIdeal = PercentOfIdeal.bind(avgModel);
+
+	function IdealDirection(prop) {
+		//Should selected value be higher than the ideal value?
+		var direction = {
+			Acres: false,
+			BikePed: true,
+			Congestion: false,
+			Costs: false,
+			GHG: false,
+			RoadCon: false,
+			Safety: false,
+			Transit: true,
+			TransitCon: false,
+			VMT: false
+		};
+		if (this.hasOwnProperty(prop)) {
+			var val = this[prop].raw();
+			if (!model2010.hasOwnProperty(prop) || (val == model2010[prop].raw())) return {'src':'img/nochange.png', 'color': 'green'};
+			var direct = val > model2010[prop].raw() ? 'up' : 'down';
+			var color = direction[prop] == (val > model2010[prop].raw()) ? 'green' : 'red';
+			return  {'src': 'img/'+color+direct+'.png', 'color': color};
+		}
+		return {'src':null, 'color':null};
+	}
+
+	viewModel.IdealDirection = IdealDirection.bind(viewModel);
+	avgModel.IdealDirection = IdealDirection.bind(avgModel);
+
+	viewModel.IndicatorDesc = function(prop, txt) {
+		//if (txt == undefined) txt = false;
+		txt = txt || false;
+		var desc = {
+			Acres: {title:'Acres Developed',content:'This is the total number of acres developed in the region for residential, commercial, industrial, transportation, community, recreation, and parking uses. There are approximately 2.44 million total acres in the region. About 550,000 are held as permanently protected open space, and just under 1 million acres are undeveloped and not protected from possible development.'},
+			BikePed: {title:'Biking & Walking Trips',content:'These are the number of trips per year an individual completes using only their feet or a bicycle. Though many auto and transit trips have a biking or walking portion, such trips count as auto or transit trips.'},
+			Congestion: {title:'Hours of Congestion',content:'This is a measure of how many hours per year the average person wastes as a result of recurring traffic delay. This delay is caused by demand for roadway space being greater than capacity. Delay also occurs from crashes, special events, construction, and weather, but these types of delay are not included in this analysis.'},
+			Costs: {title:'Transportation & Energy Costs',content:'This is an estimate of how much the average household spends per year on heating, cooling, and other electricity use, as well as total transportation costs (including vehicle ownership and operating expenses, additional transportation fees, and transit fares). Future values are presented in current-year dollars, allowing for more direct comparison to today\'s expenses. It is expected that energy prices will rise in the future at a rate greater than inflation, consuming a larger portion of the average household\'s budget.'},
+			GHG: {title:'Greenhouse Gas Emissions',content:'This is a measure of annual metric tons of greenhouse gas emissions per capita from residential energy use and the region\'s road and transit systems. These sources represent about 54 percent of the region\'s total GHG emissions. More driving, spread out development patterns, and larger houses will all cause this to increase in the future.'},
+			RoadCon: {title:'Poor Road Condition',content:'This is the percent of roads and bridges in poor condition. While not eminently unsafe, these facilities need maintenance and repair in order to avoid being closed in the future. Roads in poor condition also increase vehicle operating costs and congestion.'},
+			Transit: {title:'Transit Trips',content:'This is a measure of how many times per year an individual rides a public subway, regional rail, trolley or bus.'},
+			TransitCon: {title:'Poor Transit Condition',content:'This is an estimate of the amount of transit infrastructure in poor condition. Transit infrastructure condition impacts the reliability, safety, and ridership on the system.'},
+			VMT: {title:'Vehicle Miles Driven',content:'This is a measure of how many miles the average person drives per year.'},
+			Safety: {title:'Road Fatalities',content:'This is a measure of the estimated number of annual fatalities per 100,000 people that are likely to occur on our region\'s roadways. Generally, the more we all drive, the greater the risk that we are involved in a crash, fatal or not. Expanding our road network and sprawling development patterns generally increase the amount we drive.'}
+		};
+		return txt?desc[prop].content:desc[prop].title;
+	};
+
+	ko.applyBindings(viewModel);
+
+
+	$('.view:not(:last)').each(function() {
+		$(this).append($('<input type="button" value="Next" class="button" />').click(function() {
+			var name = $(this).parent('.view').data('title');
+			if (name == 'Transportation<br/>Projects' && viewModel.remaining() < -0.1) {
+				//alert negative budget
+				$('#myModal').modal();
+				return;
+			}
+			var index = $.inArray(name, viewModel.views);
+			if (index+1 < viewModel.views.length) viewModel.selectedView(viewModel.views[index+1]);
+		}));
+	});
+
+	function params() {
+		var obj = {},
+			arr = ['housing','dev','taxes','taxtype','taxamount','taxtypeother','mroad','mtransit','enhance','mbikeped','mfreq','transitfirst','newdev','newtransit','Acres','VMT','BikePed','Transit','RoadCon','TransitCon','Costs','Congestion','GHG','Safety','max','spending','remaining'];
+		$(arr).each(function() {
+			if(this in viewModel) {
+				if (viewModel[this].hasOwnProperty('raw'))
+					obj[this] = viewModel[this].raw();
+				else
+					obj[this] = viewModel[this]();
+			}
+		});
+		obj.taxtypeother = $('#taxtypeother').val();
+		obj.age = $("#age").val();
+		obj.zipcode = $("#zipcode").val();
+		obj.comments = $("#comments").val();
+		return obj;
+	}
+
+	$('#submitButton').click(function(e) {
+		e.preventDefault();
+		$.post('script.aspx?submit=true', params(), function(data) {
+			if (data.success)
+				this.submitted(true);
+		}.bind(viewModel),'json');
+		return false;
+	}).bind(viewModel);
+////////////////////////////////////////
+	$('section div[rel*=popover]').popover({delay:500,placement:'in bottom'});
+	$('*[rel*=tooltip]').tooltip();
+	$('.view *[rel*=popover]').css('display','inline-block').popover({delay:500,placement:'right'});
+	$('#cropped').resize(function() {
+		$(this).css({'overflow':'hidden','height':$(this).width()/4*3+'px'});
+	});
+	$('input[name=housing]').click(function() {
+		$('#cropped:visible').resize();
+	});
+	$('input[name=dev]').click(function() {
+		$(this).closest('div').animate({width:'48.9362%'},{step:function() {$('#cropped').resize();}}).siblings('div').animate({width:'23.4043%'},{step:function() {$('#cropped').resize();}});
+		//$(this).closest('div.span4,div.span3').switchClass('span3 span4','span6').siblings('div').switchClass('span4 span6','span3').eq(0).animate({'z-index':'0'},{step:function() {$('#cropped').resize();}});
+	});
+	
+	function dropped(event, ui) {
+		if ($('.dropzone').index(this)) {
+			var l = $(this).offset().left+$(this).width()-ui.draggable.width()+15;
+			viewModel.is2010(false);
+		}
+		else {
+			var l = $(this).offset().left;
+			viewModel.is2010(true);
+		}
+		$(this).append(ui.draggable.animate({left:l-$(this).parent().offset().left}));
+	}
+	$('.dropzone').css('cursor','pointer').droppable({
+		intersect:'touch',
+		drop: dropped
+	}).click(function(event) {
+		dropped.call(this, event, {draggable:$('#arrow')});
+	});
+	$('#arrow').css('cursor','pointer').draggable({
+		axis:'x',
+		containment:'#outerParent'
+	});
+	ko.computed(function() {
+		if (this.is2010()) $('#arrow').appendTo($('.dropzone:eq(0)')).animate({left:0});
+		else $('#arrow').appendTo($('.dropzone:eq(1)')).animate({left:$('.dropzone:eq(1)').offset().left+$('.dropzone:eq(1)').width()-$('#arrow').width()-$('#outerParent').offset().left});
+	}, viewModel);
+
+	$('.view img[rel*="modal"]').each(function() {
+		var modal = $($('<div class="modal"></div>').append($('<div class="modal-body"></div>').append($(this).clone()))).modal({show:false});
+		modal.bind('show', function() {$(this).fadeIn('slow');});
+		$(this).click(function() { modal.modal('show');});
+	});
+
+			function calcWidth(el, val, event) {
+			var max=el.data('max'),
+				min=el.data('min'),
+				w = (val-min)*(el.parent().width())/(max-min);
+			setWidth(el, w, event);
+		}
+
+		function setWidth(el, val, event) {
+			el.width(val);
+			bar(event, {element: el, size: {width: val}});
+		}
+
+		function bar(event, ui) {
+			var obj = (typeof ui == 'undefined') ? this : $(ui.element);
+			if (typeof ui == 'undefined') var ui= {size:{width : $(this).width()}};
+			var max=obj.data('max'),
+				min=obj.data('min'),
+				val = parseFloat(((ui.size.width)/obj.parent().width()*(max-min)+min).toFixed(1));
+			viewModel[obj.data('observable')](Math.min(val, max));
+		}
+
+		$('.progress .bar').resizable({
+			containment:'parent',
+			handles: {'e':'.handle'},
+			resize: bar,
+			stop: bar
+		});
+		$('.progress').css({'position':'relative','z-index':1}).one('visible',function() {
+			var $this = this;
+			$('.bar',this).css({'z-index':2,position:'absolute'});
+			$($('.bar',this).data('ticks')).each(function() {
+				var bar = $('.bar',$this);
+				var width = $($this).width()/(bar.data('max')-bar.data('min'))*(parseFloat(this)-bar.data('min'));
+				$($this).append(
+					$('<div>').html('&nbsp;').css({'border-left':'1px solid #ccc',position:'absolute',left:width,'z-index':1})
+				);
+			});
+		}).on('click',function(event) {
+			setWidth($('.bar',this),event.pageX-$('.bar', this).offset().left, event);
+		}).prop('title', 'Slide or click to adjust value');
+	
+});
+
+</script>
+</head>
+<body>
+	<div class="container-fluid" id="mainContent">
+		<div class="row-fluid"><div class="span12"><h1><img style="margin:20px 0 5px" src="img/header.png"/></h1></div>
+		</div>
+		<div class="row-fluid"><div class="span8" data-bind="css: {span12:selectedView() == 'Results', span8:selectedView() != 'Results'}"><div id="pane" data-bind="template: {name: 'toc', foreach: views}"><!--<a href="#intro">Home</a> | <a href="#second">Future Development</a> | <a href="#third">Housing</a>--></div></div>
+
+			<div class="span4 affix-top" id="indicators" data-bind="visible: selectedView() != 'Results'" data-spy="affix" data-offset-top="122">
+			<div style="background:transparent;padding:5px 0 0 0;margin:0 auto 10px;text-align:center;border-bottom:0;"><img rel="modal" data-placement="left" src="img/20100.png" data-bind="attr: {src: viewModel.is2010() ? 'img/20100.png' : 'img/'+housing()+dev()+'.png'}"/></div>
+			<h4 style="padding-left:25px;margin:0 0 10px;text-align:left;color:white;font-size:1.2em;" data-bind="visible: viewModel.is2010()">The Region Today...</h4>
+			<h4 style="padding-right:35px;margin:0 0 10px;text-align:right;color:white;font-size:1.2em;" data-bind="visible: !viewModel.is2010()">...Your Vision for the Future</h4>
+			<div style="color:#ccc;border-bottom:0;margin:0 10px;"><span class="row-fluid"><span class="span2" style="text-align:right;">TODAY</span>
+			<!--<span class="span8"><span style="display:block;" id="slider2010"></span></span>-->
+			<span class="span8" style="position:relative;margin-top:-4px;" id="outerParent"><span style="left:0;width:100%;position:absolute;top:14px;border-top:1px dashed #999;z-index:1;overflow:hidden;">&nbsp;</span><span style="float:left;width:50%;" class="dropzone">&nbsp;</span><span style="float:left;width:50%;overflow:hidden;" class="dropzone">&nbsp;</span><img src="img/grayarrow.png" style="position:absolute;z-index:2;left:0;margin:0 -5px;" id="arrow"/></span>
+			<span class="span2" style="text-align:left;">2040</span></span></div>
+			<section data-bind="fadeVisible:selectedView() == 'Transportation<br/>Projects',style: {background: remaining() < 0 ? '#e05531' : '#ABD14D'}" id="funding" style="margin:0px 10px;padding:0;text-align:center;">
+			<h3 data-bind="style:{color: remaining() < 0 ? 'white' : '#394C69'}"><b>Budget Remaining:</b> <span data-bind="text: '$'+(remaining()).toFixed(1)+' billion'"></span></h3>
+			</section>
+			<section style="margin:0px 10px;" id="indicatorsPane" data-bind="template: {name: 'indicator', foreach: indicators}">
+			</section>
+			<script id="indicator" type="text/html">
+			<div class="row-fluid" rel="popover" data-bind="attr: {'data-content': viewModel.IndicatorDesc($data, true)},hidden:!(($data == 'RoadCon' || $data == 'TransitCon') && !(viewModel.selectedView() == 'Transportation<br/>Projects'))" data-placement="left" style="padding:0;">
+				<div class="span3" style="border-bottom:0;color:#abd14d;font-size:1.25em;font-weight:bold;text-align:right;"><img src="img/nochange.png" style="float:left;height:38px;padding-top:5px;" data-bind="fadeVisible:true, attr: {src: viewModel.is2010() ? 'img/nochange.png' : viewModel.IdealDirection($data).src}"/><span style="padding-top:10px;float:right;" data-bind="text: viewModel.PercentOfIdeal($data), style: {color: viewModel.is2010() ? '#394C69' : viewModel.IdealDirection($data).color == 'red' ? '#e05531' : '#ABD14D'}">0%</span></div>
+				<div class="span2">
+				<p style="text-align:right;font-size:90%" data-bind="text: viewModel.is2010() ? model2010[$data] : viewModel[$data]"></p>
+				</div>
+				<div class="span7">
+				<h3 data-bind="text: viewModel.IndicatorDesc($data)"></h3>
+				</div>
+			</div>
+			</script>
+			<section style="background:white;font-size:90%;text-align:right;font-style:italic;"><a href="#" class="info" data-bind="click: function() { $('#instructions').modal('show'); }">How To Use</a></section>
+			</div>
+
+		</div>
+		<script id="toc" type="text/html">
+		<a href="javascript:void(0)" data-bind="click: function() { viewModel.selectedView($data) }, html:$data, css: {selected: $data == viewModel.selectedView()}"></a>
+		</script>
+
+	<div class="row-fluid">
+	<div id="contentColumn" data-bind="css: {span12:selectedView() == 'Results', span8:selectedView() != 'Results'}">
+		<div id="init" class="view" data-title="Introduction">
+			<p><span class="dropcap">T</span>he <i>Connections 2040 Plan for Greater Philadelphia</i> is the region's long-range plan for future development and transportation investment which envisions a more sustainable, innovative, and equitable region. Choices &amp; Voices allows you to develop your own vision for the future of Greater Philadelphia by determining your preferred future building pattern, developing an investment budget, and investigating which transportation projects you would like to see happen over the next 27 years.  You can then see the impact your choices have on a number of factors.
+			</p>
+			<p><a href="#" data-bind="click: function() { $('#instructions').modal('show'); }">Click here for instructions</a> on how to use Choices &amp; Voices. Once you have finished your scenario, you will have the option to submit it to DVRPC and add your voice to the conversation.
+			</p>
+
+</p>
+	    <div class="modal hide" id="instructions">
+    <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h3>Instructions</h3>
+    </div>
+    <div class="modal-body">
+	<p>On the upper-right corner of the screen is a map of the nine-county Greater Philadelphia region. This map will reflect how your choices would influence development patterns in the region. New development will be shown in dark brown. The more dark brown you see, the more acres your scenario develops.
+	</p>
+	<p>Below this map, is a series of indicators that display information related to our current development and transportation patterns. These regional measures will change depending on the choices you make in your scenario. Green arrows and percent changes indicate a positive outcome for the region, while red arrows and percent changes indicate a negative outcome. Use these indicators to guide your decision making and help you to better understand how the decisions we collectively make today will impact our future. For more information about each indicator, hover over them with your mouse. You can quickly compare your scenario to current indicator values, by sliding the arrow under "Your Vision for the Future" back from 2040 to today.
+	</p>
+	<p>The questions you are asked are either multiple choice, or use a slider bar to allow you to identify the amount of funding you would like to see for the type of project. You can use the green tabs across the top of the screen to go back and change your answer to any question. All project cost dollar amounts are in year-of-expenditure dollars, meaning that the impact of inflation between the present day and the year that the project is constructed is taken into account.
+	</p>
+	<p>When you are finished, you can click on the "Submit" button to send your scenario to DVRPC. Once submitted it will become part of the "Average User Scenario" shown in the results page for each indicator.
+	</p>
+	<p>Indicator values are based on regional trends, forecasts, and modeling. These results are not absolute, and many other factors, such as school quality, housing affordability, taxes, crime, technology, climate change, energy costs, and the economy, will ultimately impact location decisions. This exercise is intended to illustrate the impacts of development and transportation investments so that we are able to better consider and prepare for the future.
+	</p>
+    </div>
+    <div class="modal-footer">
+    <a href="#" class="btn" data-dismiss="modal">Continue</a>
+    </div>
+    </div>
+<h3>Let's get started!
+			</h3>
+		</div>
+		<div class="view" id="second" data-title="How Should<br/>We Grow?">
+			<h2>How Should We Grow?</h2>
+
+			<p>To meet the needs of 600,000 new residents and 300,000 new jobs over the next 27 years, should we build communities with transportation options where you can safely walk to a nearby store to get a quart of milk, or auto-oriented communities where you would drive there?
+			</p>
+			<p>To further compare living in these different types of neighborhoods, <a href="javascript:void(0)" onclick="$('#housing').fadeToggle();">click here</a>.
+			</p>
+			<table id="housing" style="display:none">
+            <tbody>
+			<tr><th>&nbsp;<th>Average new household characteristics</th><th>Auto-oriented community</th><th>Community with transportation options</th></tr>
+			<tr><th rowspan="3" class="vertical-text"><div>Total</div></th><td>Lot size (acres)</td><td>0.6</td><td>0.1</td></tr>
+			<tr><td>Interior area (sq. ft.)</td><td>2,520</td><td>1,540</td></tr>
+			<tr><td>Vehicles owned</td><td>1.4</td><td>1.1</td></tr>
+			<tr><th rowspan="8" class="vertical-text"><div>Annual</div></th><td>Vehicle miles driven </td><td>17,510</td><td>14,390</td></tr>
+			<tr><td>Transit trips</td><td>60</td><td>190</td></tr>
+			<tr><td>Biking &amp; walking trips </td><td>150</td><td>280</td></tr>
+			<tr><td>Residential energy costs</td><td>$2,080</td><td>$1,270</td></tr>
+			<tr><td>Vehicle ownership &amp; operating costs</td><td>$10,640</td><td>$8,660</td></tr>
+			<tr><td>Transit fare costs</td><td>$100</td><td>$290</td></tr>
+			<tr><td>Total transportation &amp; energy costs</td><td>$12,820</td><td>$10,220</td></tr>
+			<tr><td>Residential energy &amp; transportation greenhouse gas emissions (metric tons CO<sub>2</sub>E)</td><td>13.0</td><td>8.8</td></tr>
+			</tbody></table>
+
+			<div class="row-fluid">
+
+			<div class="span6">
+			<label><input type="radio" name="housing" value="A" data-bind="checked: housing"/> Auto-oriented communities<img style="margin:8px 0" src="img/autoorientedgraphic.png"/>
+			</label>
+			<img rel="modal" style="border-radius: 6px 6px 6px 6px;box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);margin-bottom:10px;" src="img/auto-oriented.jpg"/>
+			<!--<h5>Auto-oriented community</h5>-->
+			<p style="font-style:italic"><b>Auto-oriented communities</b> separate houses from other uses, generally requiring a vehicle to get to work, run errands, or make any other trip.</p>
+			</div>
+
+			<div class="span6">
+			<label><input type="radio" name="housing" value="B" data-bind="checked: housing"/> Communities with transportation options<img style="margin:8px 0" src="img/transportationchoicegraphic.png"/>
+			</label>
+			<img rel="modal" style="border-radius: 6px 6px 6px 6px;box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);margin-bottom:10px;" src="img/media.jpg" />
+			<!--<h5>Community with transportation options</h5>-->
+			<p style="font-style:italic"><b>Communities with transportation options</b> mix shops and residences, bringing them closer together so that getting to work, running errands, and other trips can be done by walking, biking, or taking transit.</p>
+			</div>
+
+			</div>
+
+		<div id="third-A" data-bind="fadeVisible: housing() == 'A', scrollTo: housing() == 'A'">
+			<h3>How do you think most development will look?</h3>
+			<p>Auto-oriented development means that new neighborhoods will primarily be built at the outer edges of the nine-county Greater Philadelphia region on land that was previously undeveloped.
+			</p>
+			<p>For more information about new housing characteristics in these three development patterns, <a href="javascript:void(0)" onclick="$('#devpattern').fadeToggle();">click here</a>.
+			</p>
+			<table id="devpattern" style="display:none">
+			<tr><th>&nbsp;<th>Average new household characteristics</th><th>Conventional subdivision</th><th>Conservation design subdivision</th><th>Mixed-use suburban center</th></tr>
+			<tr><th rowspan="3" class="vertical-text"><div>Total</div></th><td>Lot size (acres)</td><td>1.0</td><td>0.5</td><td>0.3</td></tr>
+			<tr><td>Interior area (sq. ft.)</td><td>2,630</td><td>2,520</td><td>2,420</td></tr>
+			<tr><td>Vehicles owned</td><td>1.4</td><td>1.4</td><td>1.3</td></tr>
+			<tr><th rowspan="8" class="vertical-text"><div>Annual</div></th><td>Vehicle miles driven </td><td>17,860</td><td>17,510</td><td>17,150</td></tr>
+			<tr><td>Transit trips</td><td>50</td><td>65</td><td>80</td></tr>
+			<tr><td>Biking &amp; walking trips </td><td>140</td><td>150</td><td>170</td></tr>
+			<tr><td>Residential energy costs</td><td>$2,170</td><td>$2,080</td><td>$1,990</td></tr>
+			<tr><td>Vehicle ownership &amp; operating costs</td><td>$10,860</td><td>$10,650</td><td>$10,420</td></tr>
+			<tr><td>Transit fare costs</td><td>$80</td><td>$100</td><td>$120</td></tr>
+			<tr><td>Transportation &amp; energy costs</td><td>$13,100</td><td>$12,820</td><td>$12,530</td></tr>
+			<tr><td>Residential energy &amp; transportation greenhouse gas emissions (metric tons CO<sub>2</sub>E)</td><td>13.4</td><td>13.0</td><td>12.5</td></tr>
+			</table>
+			<div class="row-fluid"><div class="span4">
+			<label><input type="radio" value="A" name="dev" data-bind="checked: dev"/> Conventional subdivision<img src="img/samples/1ConventionalSubdivision.png" style="margin-top:8px"/></label>
+			<div class="row-fluid"><div class="span12"><img rel="modal" style="border-radius: 6px 6px 6px 6px;box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);" src="img/samples/ConventionalDiagram.jpg"/></div></div>
+			<div class="row-fluid" style="margin-bottom:10px"><div class="span6"><img rel="modal" style="border-radius: 6px 6px 6px 6px;box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);" src="img/samples/iStock_000010568470XSmall_cropped.jpg" /></div><div class="span6"><img style="border-radius: 6px 6px 6px 6px;box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);" rel="modal" src="img/samples/img_3300.jpg"/></div></div>
+			<p style="font-style:italic"><b>Conventional subdivisions</b> mostly contain single-family homes on large lots.  Often, these homes will be disconnected from nearby development. This has been the most common type of development over the last 70 years.
+			</p>
+			</div>
+			<div class="span4">
+			<label><input type="radio" value="B" name="dev" data-bind="checked: dev"/> Conservation design subdivision<img src="img/samples/2ConservationSubdivision.png" style="margin-top:8px"/></label>
+
+			<div class="row-fluid"><div class="span12"><img rel="modal" style="border-radius: 6px 6px 6px 6px;box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);" src="img/samples/ConservationDiagram.jpg"/></div></div>
+			<div class="row-fluid" style="margin-bottom:10px"><div class="span6"><img rel="modal" style="border-radius: 6px 6px 6px 6px;box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);" src="img/samples/DSC07637.jpg" /></div><div class="span6"><img style="border-radius: 6px 6px 6px 6px;box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);" rel="modal" src="img/samples/img_3630.jpg"/></div></div>
+			<p style="font-style:italic"><b>Conservation design subdivisions</b> cluster housing units on smaller lots. Residences are located on the portion of a site most appropriate for development in order to preserve the most scenic or sensitive green space.
+			</p>
+			</div>
+			<div class="span4">
+			<label><input type="radio" value="C" name="dev" data-bind="checked: dev"/> Mixed-use suburban centers<img src="img/samples/3SuburbanCenters.png" style="margin-top:8px"/></label>
+			<div class="row-fluid"><div class="span12"><img rel="modal" style="border-radius: 6px 6px 6px 6px;box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);" src="img/samples/Urban_Design_294.jpg"/></div></div>
+			<div class="row-fluid" style="margin-bottom:10px"><div class="span6"><img rel="modal" style="border-radius: 6px 6px 6px 6px;box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);" src="img/samples/IMG_3777.jpg" /></div><div class="span6"><img style="border-radius: 6px 6px 6px 6px;box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);" rel="modal" src="img/samples/Doylestown1.jpg"/></div></div>
+			<p style="font-style:italic"><b>Mixed-use suburban centers</b> include both commercial development and various types of housing in a single development. They could replace abandoned or dying malls, strip centers, and other large, underutilized development sites in suburban areas.
+			</p>
+			</div>
+			</div>
+		</div>
+
+
+		<div id="third-B" data-bind="fadeVisible: housing() == 'B', scrollTo: housing() == 'B'">
+			<h3>Where should we locate future neighborhoods with transportation options?</h3>
+			<p>Walking, biking, and transit-oriented development is found in older suburbs, towns, and cities spread throughout Greater Philadelphia. Future development would typically occur in these places on land that was previously built on (called infill development) with a mix of multi-family (such as townhomes, duplexes, condos, and apartments) and smaller single-family housing units, located near existing employment, commercial, dining, and entertainment areas.
+			</p>
+			<p>For more information about the characteristics of new housing in these three development patterns, <a href="javascript:void(0)" onclick="$('#devpattern2').fadeToggle();">click here</a>.
+			</p>
+			<table id="devpattern2" style="display:none">
+			<tr><th>&nbsp;<th>Average new household characteristics:</th><th>Regional Towns and Centers</th><th>Core Cities and Older Suburbs</th><th>Central Business Districts</th></tr>
+			<tr><th rowspan="3" class="vertical-text"><div>Total</div></th><td>Lot size (acres)</td><td>0.14</td><td>0.10</td><td>0.06</td></tr>
+			<tr><td>Interior area (sq. ft.)</td><td>2,000</td><td>1,680</td><td>950</td></tr>
+			<tr><td>Vehicles owned</td><td>1.2</td><td>1.1</td><td>0.9</td></tr>
+			<tr><th rowspan="8" class="vertical-text"><div>Annual</div></th><td>Vehicle miles driven</td><td>15,790</td><td>14,790</td><td>12,580</td></tr>
+			<tr><td>Transit trips</td><td>130</td><td>180</td><td>270</td></tr>
+			<tr><td>Biking &amp; walking trips </td><td>220</td><td>260</td><td>350</td></tr>
+			<tr><td>Residential energy costs</td><td>$1,650</td><td>$1,390</td><td>$780</td></tr>
+			<tr><td>Vehicle ownership &amp; operating costs</td><td>$9,560</td><td>$8,920</td><td>$7,490</td></tr>
+			<tr><td>Transit fare costs</td><td>$200</td><td>$270</td><td>$410</td></tr>
+			<tr><td>Transportation &amp; energy costs</td><td>$12,410</td><td>$10,570</td><td>$8,690</td></tr>
+			<tr><td>Residential energy &amp; transportation greenhouse gas emissions (metric tons CO<sub>2</sub>E)</td><td>10.7</td><td>9.4</td><td>6.3</td></tr>
+			</table>
+
+			<div class="row-fluid">
+			<div class="span4">
+			<label><input type="radio" value="A" name="dev" data-bind="checked: dev"/> Regional Towns and Centers<img src="img/samples/4TownsAndCities.png" style="margin-top:8px"/></label>
+			<div class="row-fluid"><div class="span12"><img rel="modal" style="border-radius: 6px 6px 6px 6px;box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);" src="img/samples/HaddonfieldIMG_3414.jpg" /></div></div>
+			<div class="row-fluid" style="margin-bottom:10px"><div class="span6"><img rel="modal" style="border-radius: 6px 6px 6px 6px;box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);" src="img/samples/WashTownCtrSvekla0171.jpg" /></div><div class="span6"><img style="border-radius: 6px 6px 6px 6px;box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);" rel="modal" src="img/samples/IMG_3432.jpg"/></div></div>
+			<p style="font-style:italic"><b>Regional towns and centers</b> construct a range of housing types in a variety of locations. This is the strategy advocated by DVRPC's <i>Connections 2040</i> Plan.
+			</p>
+			</div>
+			<div class="span4">
+			<label><input type="radio" value="B" name="dev" data-bind="checked: dev"/> Core Cities and Older Suburbs<img src="img/samples/5CoreCitiesInnerRingSuburbs.png" style="margin-top:8px"/></label>
+			<div class="row-fluid"><div class="span12"><img rel="modal" style="border-radius: 6px 6px 6px 6px;box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);" src="img/samples/CranfordDSCN1278.jpg"/></div></div>
+			<div class="row-fluid" style="margin-bottom:10px"><div class="span6"><img rel="modal" style="border-radius: 6px 6px 6px 6px;box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);" src="img/samples/DSC00043.jpg" /></div><div class="span6"><img style="border-radius: 6px 6px 6px 6px;box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);" rel="modal" src="img/samples/Minneapolis_IMG3787.jpg"/></div></div>
+			<p style="font-style:italic"><b>Core city and older suburb</b> development patterns create new attached, townhouse, and mid-rise residential buildings in these areas.
+			</p>
+			</div>
+			<div class="span4">
+			<label><input type="radio" value="C" name="dev" data-bind="checked: dev"/> Central Business Districts<img src="img/samples/6CentralBusinessDistricts.png" style="margin-top:8px"/></label>
+			<div class="row-fluid"><div class="span6" style="float:right;margin-left: 2.12766%;overflow:hidden;border-radius: 6px 6px 6px 6px;box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);"><img rel="modal" src="img/samples/P1080480.jpg"/></div><div class="span6" style="margin-left:0;float:right;overflow:hidden;border-radius: 6px 6px 6px 6px;box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);"><img rel="modal" src="img/samples/Portland(64).jpg"/></div><div class="span6" style="overflow:hidden;float:right;margin-left:0;border-radius: 6px 6px 6px 6px;box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);"><img rel="modal" src="img/samples/Img_4639.jpg"/></div></div>
+			<div class="row-fluid" style="margin-bottom:10px"></div>
+			<p style="font-style:italic"><b>Central business districts</b> concentrate development in mid- and high-rise buildings in and around regional downtowns.
+			</p>
+			</div>
+			</div>
+
+		</div>
+		</div>
+
+
+		<div class="view" id="four" data-title="Transportation<br/>Funding">
+			<h2>Transportation Funding</h2>
+			<p>The passage of Act 89 has provided a significant increase in funding for transportation investments in Pennsylvania. However, the region still faces a considerable shortfall between the cost to maintain and improve our roads, bridges, and transit system and the anticipated revenue the region will receive over the life of the <i>Connections 2040</i> Plan. The Plan is required to maintain a balanced budget, and cannot spend any more than can be reasonably anticipated.
+			</p>
+			<p>Given our funding gap, and the fact that the Greater Philadelphia region pays a lower local share for transportation infrastructure than many of our competing regions, the <i>Connections 2040</i> Plan considers ways to increase funding to help improve our transportation system, in order to enhance quality of life and maintain economic competitiveness.
+			</p>
+			<p><b>Do you think additional local funding is necessary to help pay for state-of-good repair needs and some new major transportation projects in the Greater Philadelphia region?</b>
+			</p>
+			<ul>
+			<li><label class="radio"><input type="radio" value="Yes" name="taxes" data-bind="checked: taxes"/> Yes</label></li>
+			<li><label class="radio"><input type="radio" value="No" name="taxes" data-bind="checked: taxes"/> No</label></li>
+			</ul>
+
+			<div data-bind="fadeVisible: taxes() == 'Yes', scrollTo: taxes() == 'Yes'">
+			<p><b>What type of local funding source(s) would you be willing to support? (Check all that apply)</b>
+			</p>
+			<ul>
+			<li><label class="checkbox" data-content="This tax is the current primary source of funding for both state and federal governments. The federal tax rate is 18.4 cents per gallon for gasoline and 24.4 cents per gallon for diesel fuel. Act 89 of 2013 raised the Pennsylvania state tax to 40.7 cents per gallon for gasoline and 51.0 cents per gallon for diesel starting January 1, 2014. This was done by uncapping the $1.25 maximum rate at which the wholesale fuel cost of gasoline is taxed. The cap will be lifted two more times, in 2015 and 2017, resulting in state tax rates of 65 cents per gallon for gasoline and 81.5 cents per gallon for diesel. These rates will be adjusted annually, beginning on January 1, 2019 based on the wholesale fuel prices. In New Jersey, the tax is 14.5 cents per gallon for gasoline and 17.5 cents per gallon for diesel. Since these rates are per gallon, the amount of tax revenue collected does not increase with rising gasoline prices. An option is to charge a sales tax on gasoline purchases. Currently the sales tax is not applied to gasoline purchases in either Pennsylvania or New Jersey." rel="popover"><input type="checkbox" value="D" name="taxtype" data-bind="checked: taxtype"/> Increase the gas tax</label></li>
+			<li><label class="checkbox" data-content="Fares are direct-user charges. Revenue collected on buses, trolleys, subways, and commuter rail trains is used to pay for operating costs." rel="popover"><input type="checkbox" value="E" name="taxtype" data-bind="checked: taxtype"/> Increase transit fares</label></li>
+			<li><label class="checkbox" data-content="Vehicle registration fees are paid annually in both Pennsylvania and New Jersey. Act 89 increases Pennsylvania's flat rate to $37 per year on July 1, 2015 and then $38 per year on July 1, 2017. It will then be adjusted using a consumer price index inflationary factor every two years beginning July 1, 2019. New Jersey has a sliding scale depending on vehicle age and weight, ranging from $35.50 to $84 per year." rel="popover"><input type="checkbox" value="F" name="taxtype" data-bind="checked: taxtype"/> Increase vehicle registration fees</label></li>
+			<li><label class="checkbox" data-content="A sales tax, or sales and use tax, is levied on the purchase price for goods, products and services. It is collected by the state at the time of purchase." rel="popover"><input type="checkbox" value="G" name="taxtype" data-bind="checked: taxtype"/> Increase the general sales tax</label></li>
+			<li><label class="checkbox" data-content="This fee treats roads like a utility, and charges a rate per mile driven. It could be paid at the gas pump, billed on a regular basis, or paid when renewing registration." rel="popover"><input type="checkbox" value="C" name="taxtype" data-bind="checked: taxtype"/> Mileage tax</label></li>
+			<li><label class="checkbox" data-content="This option could create toll charges based on miles driven on limited access highways such as I-76, I-95, I-476, I-676, and US 422 in Pennsylvania and on I-76, I-95, I-195, I-295, I-676, NJ 42, and NJ 55 in New Jersey. Tolls could be all electronic using E Z Pass and digital license plate photography to keep traffic from slowing down. Alternatively, there could be a regional toll surcharge on existing toll facilities such as the Pennsylvania Turnpike, the New Jersey Turnpike, the Garden State Parkway, and the Atlantic City Expressway, or on toll bridges that cross the Delaware River." rel="popover"><input type="checkbox" value="B" name="taxtype" data-bind="checked: taxtype"/> Place tolls on the region's limited access highways</label></li>
+			<li><label class="checkbox" data-content="Applies variable tolls to manage demand and reduce congestion. Can exist as priced lanes (High-Occupancy Toll (HOT) or express lanes), priced highways (all lanes are tolled), priced zones (area or cordon, such as the congestion toll to enter central London), priced road networks, or parking pricing." rel="popover"><input type="checkbox" value="A" name="taxtype" data-bind="checked: taxtype"/> Congestion Pricing</label></li>
+			<li><label class="checkbox" data-content="This would add a tax to anything that emits carbon as part of its use. The assumption is that a tax associated with carbon emissions from transportation system use would be invested back into the transportation system, while helping to encourage lower carbon alternative fuels, and increased fuel efficiency." rel="popover"><input type="checkbox" value="I" name="taxtype" data-bind="checked: taxtype"/> Carbon Tax</label></li>
+
+
+
+			<li><label class="checkbox" data-content="Other tax options could include property tax; real estate transfer tax; hotel room or rental vehicle tax; income tax; cigarette or liquor taxes; occupational privilege tax; parking tax; tax increment financing; tire tax; vehicle lease, property, or sales tax." rel="popover"><input type="checkbox" value="H" name="taxtype" data-bind="checked: taxtype"/> Other</label><input type="text" id="taxtypeother" name="taxtypeother" data-bind="fadeVisible: $.inArray('H', taxtype())>-1" placeholder="(please specify)" style="display:block;" /></li>
+			</ul>
+
+			<p rel="popover" data-content="Amount indicated here will be divided equally between all selected funding sources. For instance if you selected transit fares and the gas tax, with $100 per household, <i>Choices &amp; Voices</i> will assume that $50 per household per year in increased transit fares and $50 per household per year in increased gas taxes." style="display:block;"><b>How much should these new funding sources cost the average household per year in total?</b>
+			</p>
+			<div class="progress">
+			<div data-observable="taxamount" data-min="0" data-max="500" class="bar"><span class="ui-resizable-handle ui-resizable-e handle" data-bind="text: '$'+taxamount()">$</span></div>
+			</div>
+		</div>
+		</div>
+
+
+		<div class="view" id="six" data-title="Transportation<br/>Projects">
+		<h2>Transportation Projects</h2>
+		<p>You have <span style="font-weight:bold" rel="popover" data-content="Projected revenue to 2040 minus other needs not addressed in this program and projects underway such as transit fare modernization.">$<span class="total" data-bind="text: max().toFixed(1)"></span> billion</span> to invest in transportation projects from now to 2040. You can use this to maintain the system, make operational improvements, or build new highway or transit projects.
+		</p>
+		<h3>System Preservation</h3>
+		<p><b>How well do you want to maintain roads and bridges?</b>
+		</p>
+		<p>Failure to properly maintain roads and bridges reduces safety, increases <span rel="popover" data-content="Includes tires, depreciation, oil and fuel use, and maintenance and repair">vehicle operating costs</span>, increases travel delay, and vehicle emissions.
+		</p>
+
+		<div class="progress">
+			<div data-observable="mroad" data-min="25" data-max="59.8" data-ticks="[30.6,33.0,59.8]" class="bar"><span class="ui-resizable-handle ui-resizable-e handle" data-bind="text: '$'+mroad()">$</span></div>
+		</div>
+		<div class="row-fluid"><div id="pop1" class="popover bottom span12" style="display: block;margin:20px 0px;position: relative;">
+            <div class="arrow"></div>
+            <h4 class="popover-title" data-bind="with: mroad" style="font-weight:bold;">$ <span data-bind="text:$data" class="val">0.0</span> billion - <span data-bind="visible: $data < 33.0" class="title">Maintain current funding levels</span> <span data-bind="visible: $data < 59.8 && $data >= 33.0" class="title">Maintain current conditions</span> <span data-bind="visible: $data >= 59.8, class: {visible: $data >= 74.5}" class="title">Achieve and maintain a state-of-good repair for all facilities</span></h4>
+            <div class="popover-content" rel="tooltip" title="Or use slider bar above to select an amount in between" data-placement="bottom">
+              <div class="row-fluid">
+				<div class="span4" style="cursor:pointer" data-bind="click: function(model, event) {calcWidth($('.progress .bar[data-observable=mroad]'), 30.6, event)}">
+					<img src="img/current_funding.jpg"/><br/><b>Click here</b> to maintain current funding levels, current conditions worsen
+				</div>
+				<div class="span4" style="cursor:pointer" data-bind="click: function(model, event) {calcWidth($('.progress .bar[data-observable=mroad]'), 33.0, event)}">
+					<img src="img/current_conditions.jpg"/><br/><b>Click here</b> to maintain current conditions
+				</div>
+				<div class="span4" style="cursor:pointer" data-bind="click: function(model, event) {calcWidth($('.progress .bar[data-observable=mroad]'), 59.8, event)}">
+					<img src="img/good_repair.jpg"/><br/><b>Click here</b> to acheive and maintain a state-of-good-repair
+				</div>
+			  </div>
+            </div>
+          </div></div>
+		  <div class="clear"></div>
+
+
+		<p rel="popover" data-content="Critical system preservation needs include replacing bridges that date back 100 years or more, improving 80-year old electric power substations, and purchasing new regional rail cars and trolleys to replace vehicles that are well beyond their useful service life. The $17.5 billion to maintain the current system does not fully account for the bonds that are likely to be secured in order to finance major rail vehicle procurements."><b>At what level would you like to maintain transit infrastructure, including rail infrastructure, transit vehicles, and transit stations?</b>
+		</p>
+		<p>Failure to properly maintain transit infrastructure reduces  the safety and reliability of the system as well as the comfort level of the user, all of which lead to lower ridership levels.
+		</p>
+		<!--<div class="row-fluid">
+			<div id="map" class="span12">
+				<div class="map-inner">
+					<img src="img/rail_doom.png" data-z="0" data-bind="fadeVisible: mtransit() <= 17.5" />
+					<img src="img/rail_threatened.png" data-z="0" data-bind="fadeVisible: mtransit() > 17.5 && mtransit() < 20.9" />
+					<img src="img/rail_full.png" data-z="0" data-bind="fadeVisible: mtransit() >= 20.9" />
+				</div>
+			</div>
+		</div>-->
+		<div class="progress">
+			<div data-observable="mtransit" data-min="16" data-max="30.9" data-ticks="[17.5, 20.9, 30.9]" class="bar"><span class="ui-resizable-handle ui-resizable-e handle" data-bind="text: '$'+mtransit()">$</span></div>
+		</div>
+		<div class="row-fluid"><div id="pop2" class="popover bottom span12" style="display: block;margin:20px 0px;position: relative;">
+            <div class="arrow"></div>
+            <h4 class="popover-title" style="font-weight:bold;">$ <span data-bind="text:mtransit()" class="val">0.0</span> billion - <span data-bind="visible: mtransit() < 20.9 && mtransit() >= 17.5" class="title">Maintain current funding levels</span> <span data-bind="visible: mtransit() < 30.9 && mtransit() >= 20.9" class="title">Maintain current conditions</span> <span data-bind="visible: mtransit() >= 30.3" class="title">Achieve and maintain a state-of-good repair (this would include full Americans with Disabilities Act requirements)</span></h4>
+            <div class="popover-content" rel="tooltip" title="Or use slider bar above to select an amount in between" data-placement="bottom">
+              <div class="row-fluid">
+                <div class="span4" style="cursor:pointer" data-bind="click: function(model, event) {calcWidth($('.progress .bar[data-observable=mtransit]'), 17.5, event)}">
+					<img src="img/transit_poor.jpg"/><br/><b>Click here</b> to maintain current funding levels, current conditions worsen
+				</div>
+				<div class="span4" style="cursor:pointer" data-bind="click: function(model, event) {calcWidth($('.progress .bar[data-observable=mtransit]'), 20.9, event)}">
+					<img src="img/transit_current.png"/><br/><b>Click here</b> to maintain current conditions
+				</div>
+				<div class="span4" style="cursor:pointer" data-bind="click: function(model, event) {calcWidth($('.progress .bar[data-observable=mtransit]'), 30.9, event)}">
+					<img src="img/SOGR.jpg"/><br/><b>Click here</b> to achieve and maintain a state-of-good repair
+				</div>
+
+			  </div>
+            </div>
+          </div></div>
+		  <div class="clear"></div>
+
+		<h3>System Enhancements</h3>
+		<p rel="popover" data-content="Types of projects include intersection improvements; roadway realignments; access improvements; interconnected or adaptive traffic signals; roadway incident management programs; and Intelligent Transportation Systems (ITS) projects, such as variable message signs, incident detection, closed circuit TV, and travel time detectors to provide real-time travel information. The <i>Connections 2040</i> Plan proposes $4.5 billion in expenditures for these types of projects over the next 27 years."><b>How much should we invest in roadway operational improvements?</b>
+            </p>
+            <p>This increases the safety and efficiency of our existing road network.
+		</p>
+		<div class="progress" style="margin-bottom:20px;">
+			<div data-observable="enhance" data-min="0" data-max="6.5" class="bar"><span class="ui-resizable-handle ui-resizable-e handle" data-bind="text: '$'+enhance()">$</span></div>
+		</div>
+		<!--<div class="row-fluid"><div id="popenhance" class="popover bottom span12" style="display: block;margin:20px 0px;position: relative;">
+            <div class="arrow"></div>
+            <h4 class="popover-title" style="font-weight:bold;">$ <span data-bind="text:enhance()" class="val">0.0</span> billion</h4>
+        </div>
+        </div>-->
+
+        <p rel="popover" data-content="These projects include the Circuit, a 750-mile regional trail network; bike lanes; sidewalks; streetscaping; and safety improvements. The <i>Connections 2040</i> Plan proposes $0.6 billion in expenditures for these types of projects over the next 27 years."><b>How much should we invest in bicycle and pedestrian improvements?</b>
+            </p>
+            <p>This increases the safety and efficiency of non-motorized transportation.
+        </p>
+        <div class="progress" style="margin-bottom:20px;">
+			<div data-observable="mbikeped" data-min="0" data-max="0.7" class="bar"><span class="ui-resizable-handle ui-resizable-e handle" data-bind="text: '$'+mbikeped()">$</span></div>
+		</div>
+		<!--<div class="row-fluid"><div id="popbikeped" class="popover bottom span12" style="display: block;margin:20px 0px;position: relative;">
+            <div class="arrow"></div>
+            <h4 class="popover-title" style="font-weight:bold;">$ <span data-bind="text:mbikeped()" class="val">0.0</span> billion</h4>
+        </div>
+        </div> -->
+
+        <p rel="popover" data-content="These projects include purchasing additional regional rail vehicles, and larger trolleys to deal with overcrowding issues; double tracking and sidings; and operational costs for more frequent service. Selecting the full $22 billion in this category assumes a 25 percent service increase, meaning a vehicle currently scheduled to come every 20 minutes would come every 15. The <i>Connections 2040</i> Plan proposes $1.1 billion in expenditures for these types of projects over the next 27 years."><b>How much should we invest in increasing transit service frequency?</b>
+            </p>
+            <p>This will reduce the commute time and increase the convenience of public transit.
+        </p>
+        <div class="progress" style="margin-bottom:20px;">
+			<div data-observable="mfreq" data-min="0" data-max="22" class="bar"><span class="ui-resizable-handle ui-resizable-e handle" data-bind="text: '$'+mfreq()">$</span></div>
+		</div>
+
+		<p rel="popover" data-content="These projects improve the speed and reliability of the transit system. Initiatives include traffic signal prioritization for transit vehicles, stop consolidation or limited stop operations, stop relocation from the near to the far side of the intersection, or exclusive right-of-way operations that may include shoulder operating segments and/or queue-jumping lanes. Capital costs are assumed to equal operating cost savings, meaning a net $0 investment. <i>Connections 2040</i> proposes to advance transit enhancement projects as appropriate throughout the region."><b>Should we implement a region-wide Transit Enhancements initiative?</b>
+            </p>
+            <p>This includes elements like transit signal priority (TSP), more express service, and bus and trolley stops that feel more like stations.
+            </p>
+		<ul class="nav nav-pills">
+			<li data-bind="css: {active: transitfirst}"><a data-bind="click: function() {viewModel.transitfirst(true)}" href="#">Yes</a></li>
+			<li data-bind="css: {active: !transitfirst()}"><a data-bind="click: function() {viewModel.transitfirst(false)}" href="#">No</a></li>
+		</ul>
+
+		<h3>System Expansion</h3>
+		<p data-content="Cost estimates are only for the new capacity portion of the project. When adding capacity to an existing facility, that facility is usually reconstructed, increasing project costs. These costs are assumed to be covered under the road and bridge maintenance question." rel="popover"><b>How much roadway system expansion would you like to see?</b>
+		</p>
+		<p>The <i>Connections 2040</i> Plan includes new roads, roadway widenings and extensions, and new interchange movements, benefitting goods movement and personal mobility.
+		</p>
+
+		<div class="row-fluid">
+			<div id="map" class="span12">
+				<div class="map-inner">
+					<img src="img/road_1.png" data-z="0" data-bind="fadeVisible: newdev() == 0" />
+					<img src="img/road_2.png" data-z="0" data-bind="fadeVisible: newdev() > 0 && newdev() < 1.7" />
+					<img src="img/road_3.png" data-z="0" data-bind="fadeVisible: newdev() == 1.7" />
+					<img src="img/road_4.png" data-z="0" data-bind="fadeVisible: newdev() > 1.7 && newdev() < 2.5" />
+					<img src="img/road_5.png" data-z="0" data-bind="fadeVisible: newdev() >= 2.5" />
+				</div>
+			</div>
+		</div>
+		<div class="progress" rel="tooltip" data-content="Slide bar to adjust value" data-placement="top">
+			<div data-observable="newdev" data-min="0" data-max="2.5" data-ticks="[0,1.7,2.5]" class="bar"><span class="ui-resizable-handle ui-resizable-e handle" data-bind="text: '$'+newdev()">$</span></div>
+		</div>
+		<div class="row-fluid"><div id="popnewdev" class="popover bottom span12" style="display: block;margin:20px 0px;position: relative;">
+            <div class="arrow"></div>
+            <h4 class="popover-title" style="font-weight:bold;">$ <span data-bind="text:newdev()" class="val">0.0</span> billion</h4>
+            <div class="popover-content" rel="tooltip" title="Or use slider bar above to select an amount in between" data-placement="bottom">
+              <div class="row-fluid">
+				<div class="span4" style="cursor:pointer" data-bind="click: function(model, event) {calcWidth($('.progress .bar[data-observable=newdev]'), 0, event)}">
+					<b>Click here</b> for no system expansion
+				</div>
+				<div class="span4" style="cursor:pointer" data-bind="click: function(model, event) {calcWidth($('.progress .bar[data-observable=newdev]'), 1.7, event)}">
+					<b>Click here</b> for <i>Connections 2040</i> system expansion
+				</div>
+				<div class="span4" style="cursor:pointer" data-bind="click: function(model, event) {calcWidth($('.progress .bar[data-observable=newdev]'), 2.5, event)}">
+					<b>Click here</b> for full regional roadway expansion vision
+				</div>
+
+			  </div>
+            </div>
+        </div>
+        </div>
+        <!--<p style="font-size:0.8em"><i>Note: Cost estimates are only for the new capacity portion of the project. When adding capacity to an existing road, that facility is usually reconstructed, adding significant project costs. These costs are assumed to be covered under the road and bridge maintenance question. </i>
+		</p> -->
+
+		<p data-content="The <i>Connections 2040</i> Plan invests in service expansions of the Elwyn Line to Wawa, PA, the Norristown High Speed Line spur to King of Prussia, the South Jersey BRT, US 1 BRT, and begins construction on the Glassboro-Camden Line but opening date is beyond 2040." rel="popover"><b>What new transit facilities would you like the region to pursue?</b>
+		</p>
+		<p>Expanding transit service is critical to improving regional mobility, efficiency, and competitiveness in the 21<sup>st</sup> century economy.
+		</p>
+		<div data-bind="visible: mtransit() < 16" class="alert alert-error">
+			If transit system preservation funding is below $16 billion to maintain the current network, regional rail and the Norristown High Speed lines cannot be extended.
+		</div>
+
+    <div class="row-fluid">
+      <div class="span8 offset2" style="text-align:center">
+        <img width="400" src="img/transit_all.png" data-z="0" data-bind="fadeVisible: mtransit() >= 16" />
+      </div>
+    </div>
+    <div class="row-fluid"><div id="popnewdev" class="popover bottom span12" style="display: block;margin:20px 0px;position: relative;">
+            <div class="arrow"></div>
+			<h4 class="popover-title" style="font-weight:bold;">$ <span data-bind="text:transitSpending() > 0 ? transitSpending().toFixed(1) : 0" class="val">0.0</span> billion</h4>
+            <div class="popover-content" rel="tooltip" title="Or choose projects below" data-placement="bottom">
+              <div class="row-fluid">
+				<div class="span4" style="cursor:pointer" data-bind="click: function(model, event) {newtransit([])}">
+					<b>Click here</b> for no transit system expansion
+				</div>
+				<div class="span4" style="cursor:pointer" data-bind="click: function(model, event) {newtransit(['NorristownHSL','WawaRR','US1BRT','NJ42BRT','PATCO'])}">
+					<b>Click here</b> for <i>Connections 2040</i> transit system expansion
+				</div>
+				<div class="span4" style="cursor:pointer" data-bind="click: function(model, event) {newtransit(['QuakertownRR', 'AtglenRR', 'BerksRR', 'WawaRR', 'NorristownHSL', 'DelawareAveRR', 'NavyYardBSS', 'SouthamptonBRT', 'CulturalConnector', 'NJ42BRT', 'PATCO', 'US1BRT', 'WestTrenton'])}">
+					<b>Click here</b> for full regional transit expansion vision
+				</div>
+			  </div>
+            </div>
+        </div>
+        </div>
+		<div class="row-fluid">
+			<div class="span6">
+        <label class="checkbox"><input type="checkbox" value="QuakertownRR" name="newtransit" data-bind="disable: mtransit() < 16, checked: newtransit" /> <a>1</a> Extend Lansdale Line to Pennridge, Pennsylvania - $0.3 billion</label>
+    		<label class="checkbox"><input type="checkbox" value="AtglenRR" name="newtransit" data-bind="disable: mtransit() < 16, checked: newtransit" /> <a>2</a> Extend Paoli-Thorndale Line to Atglen, Pennsylvania - $0.1 billion</label>
+    		<label class="checkbox"><input type="checkbox" value="BerksRR" name="newtransit" data-bind="disable: mtransit() < 16, checked: newtransit" /> <a>3</a> Extend Norristown Regional Rail Line to Pottstown, PA - $1.0 billion</label>
+    		<label class="checkbox"><input type="checkbox" value="WawaRR" name="newtransit" data-bind="disable: mtransit() < 16, checked: newtransit" /> <a>4</a> Extend Media-Elwyn Line to Wawa, PA - $0.1 billion</label>
+    		<label class="checkbox"><input type="checkbox" value="NorristownHSL" name="newtransit" data-bind="disable: mtransit() < 16, checked: newtransit" /> <a>5</a> Extend Norristown High Speed Line to King of Prussia Mall - $0.5 billion</label>
+    		<label class="checkbox"><input type="checkbox" value="DelawareAveRR" name="newtransit" data-bind="checked: newtransit" /> <a>6</a> New Delaware Ave. Rail Line - $1.3 billion</label>
+    		<label class="checkbox"><input type="checkbox" value="NavyYardBSS" name="newtransit" data-bind="checked: newtransit" /> <a>7</a> Extend Broad Street Line from AT&amp;T Station to Navy Yard - $0.9 billion</label>
+    	</div>
+			<div class="span6">
+				<label class="checkbox"><input type="checkbox" value="SouthamptonBRT" name="newtransit" data-bind="checked: newtransit" /> <a>8</a> Roosevelt Boulevard Bus Rapid Transit from Lower Bucks County to Frankford Transportation Center and Broad Street - $0.2 billion</label>
+        <label class="checkbox"><input type="checkbox" value="CulturalConnector" name="newtransit" data-bind="checked: newtransit" /> <a>9</a> New Cultural Corridor Line from Center City to Parkside/Fairmount Park - $0.5 billion</label>
+        <label class="checkbox"><input type="checkbox" value="NJ42BRT" name="newtransit" data-bind="checked: newtransit" /> <a>10</a> New South Jersey Bus Rapid Transit - $0.1 billion</label>
+        <label class="checkbox"><input type="checkbox" value="PATCO" name="newtransit" data-bind="checked: newtransit" /> <a>11</a> New Glassboro-Camden Line - $2.4 billion</label>
+        <label class="checkbox"><input type="checkbox" value="US1BRT" name="newtransit" data-bind="checked: newtransit" /> <a>12</a> New US 1 Bus Rapid Transit - $0.4 billion</label>
+        <label class="checkbox"><input type="checkbox" value="WestTrenton" name="newtransit" data-bind="checked: newtransit" /> <a>13</a> New West Trenton Rail Line to Bridgewater, NJ with service to NYC via NJ Transit Raritan Valley Line - $0.2 billion</label>
+			</div>
+		</div>
+
+
+		<button class="nextButton" type="button" value="Next" rel="final">Next</button>
+		</div>
+
+		<div class="view" id="final" data-title="Results">
+
+<form class="modal" style="position: relative; top: auto; left: auto; margin: 0 auto 25px; z-index: 1; width: 100%;" data-bind="fadeVisible: !submitted()">
+<div class="modal-header" style="background-color:#394C69;padding: 0 15px;"><h2 style="color:white">Results</h2></div>
+<div class="modal-body"><div class="row-fluid"><div class="span4" style="border-right:1px dashed #999;padding-right:15px"><p>Please review your scenario's results below. If you are not satisfied with your outcomes, use the green bar above to navigate to different sections and revise your selections. Once you are happy with your scenario, indicate your age and zip code and then click the submit button to have it included in the vision for Greater Philadelphia, as shown in Everyone's Scenario below.
+</p></div>
+<div class="span2">
+<label>Age:<br/><select name="age" id="age" class="span12">
+	<option>Select Age</option>
+	<option>Under 18</option>
+	<option>18-24</option>
+	<option>25-34</option>
+	<option>35-44</option>
+	<option>45-54</option>
+	<option>55-64</option>
+	<option>65-74</option>
+	<option>Over 74</option>
+	<option>Prefer not to answer</option>
+</select></label>
+<label>Zip Code:<br/><input name="zipcode" id="zipcode" class="span12"/></label>
+</div>
+<div class="span4">
+<label>Comments:<br/><textarea name="comments" id="comments" class="span12"></textarea></label>
+</div>
+<div class="span2">
+<input type="submit" id="submitButton" class="button" value="Submit"/>
+</div></div></div>
+</form>
+
+<div class="row-fluid" style="padding:0 0 20px 0;" data-bind="style: {borderTop:viewModel.submitted()?'0 none':'1px dashed #394C69',marginTop:viewModel.submitted()?'-20px':'0px'}">
+<div class="span4">
+<p><img src="img/20100.png" data-bind="attr: {src: viewModel.is2010() ? 'img/20100.png' : 'img/'+housing()+dev()+'.png'}" style="border: 1px solid rgba(0, 0, 0, 0.3);border-radius: 6px;box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);background-color:#394C69;"/>
+</p>
+</div>
+<div class="span8">
+<h2>Your Vision for the Future...
+</h2>
+
+<p style="border-bottom:1px dashed #aaa;padding-bottom:20px;">Thank you for participating in DVRPC's <i>Connections 2040</i> Choices &amp; Voices. Read on to learn more about what your choices would mean for the Greater Philadelphia region in 2040. You can learn more about <a href="http://www.dvrpc.org/Connections2040/" target="_blank"><i>Connections 2040 Plan for Greater Philadelphia</i></a> on our website.
+</p>
+<div class="row-fluid"><div class="span2" style="border-right:1px dashed #aaa;">
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.dvrpc.org/ChoicesAndVoices/" data-text="I just added my voice to Greater Philadelphia's future...Add yours too!" data-via="DVRPC" data-size="large" data-count="none">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</div>
+<div class="span6">
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-like" data-href="http://www.dvrpc.org/ChoicesAndVoices/" data-send="false" data-width="450" data-show-faces="true" data-action="recommend"></div>
+</div></div>
+</div>
+</div>
+<div class="row-fluid" style="background-color:#394C69;color:white;margin:0 -20px -20px;padding:0 20px 20px;"><div class="span12" data-bind="template: {name: 'resultsRow', foreach: indicators}">
+<script id="resultsRow" type="text/html">
+	<div class="row-fluid" style="margin-top:0;" data-bind="style: {borderBottom:viewModel.indicators.indexOf($data)+1===viewModel.indicators.length?'0':'1px dashed white'}">
+	<div class="span6" style="font-style:italic">
+	<h4 style="margin-bottom:0;" data-bind="text: viewModel.IndicatorDesc($data)"></h4>
+	<!-- ko if: $data == 'Acres' -->
+	<p data-bind="visible: viewModel.Acres.raw() < 1150000">Most new growth in Greater Philadelphia has occurred in our region's existing towns and cities. New development in these places helps to revitalize these communities, promotes alternative transportation options, and preserves open space.
+	</p>
+	<p data-bind="visible: viewModel.Acres.raw() >= 1150000">Most new growth in Greater Philadelphia has continued to occur at the outer edges of the region. A significant number of undeveloped acres are consumed as new homes, offices, and retail centers are constructed across a vast area. Transportation around these areas generally relies on a personal automobile.
+	</p>
+	<!-- /ko -->
+	<!-- ko if: $data == 'Costs' -->
+	<p data-bind="visible: viewModel.housing() == 'A' && viewModel.RoadCon.raw() <= 0.15">Your scenario has focused considerable investment on road and bridge maintenance, and conditions have improved substantially. This helps to lower vehicle operating and maintenance costs. However, owning and operating an automobile is typically a household's largest transportation-related expense. According to AAA, the cost to own and operate a sedan was nearly $9,000 per year in 2012. Policies and development patterns that reduce our reliance on personal automobiles can help lower transportation costs. Consider smaller, more compact development patterns to further reduce the costs of heating and cooling.
+	</p>
+	<p data-bind="visible: viewModel.housing() == 'A' && viewModel.RoadCon.raw() > 0.15 && viewModel.RoadCon.raw() <= 0.21">Your scenario has focused considerable investment on road and bridge maintenance, and conditions generally have been maintained at today's level. This helps to keep vehicle operating costs from significantly rising. Owning and operating an automobile is typically a household's largest transportation-related expense. According to AAA, the cost to own and operate a sedan was nearly $9,000 per year in 2012. Policies and development patterns that reduce our reliance on personal automobiles can help lower transportation costs. Consider smaller, more compact development patterns to further reduce the costs of heating and cooling.
+
+	</p>
+	<p data-bind="visible: viewModel.housing() == 'A' && viewModel.RoadCon.raw() > 0.21 && viewModel.RoadCon.raw() <= 0.30">Road and bridge conditions have worsened in your scenario, resulting in increased vehicle operating and maintenance costs. This compounds the fact that owning and operating an automobile is typically a household's largest transportation-related expense. According to AAA, the cost to own and operate a sedan was nearly $9,000 per year in 2012. Policies and development patterns that reduce our reliance on personal automobiles can help lower transportation costs. Consider smaller, more compact development patterns to further reduce the costs of heating and cooling.
+	</p>
+	<p data-bind="visible: viewModel.housing() == 'A' && viewModel.RoadCon.raw() > 0.3">The region's roads and bridges have increasingly fallen into disrepair due to old age and a lack of investment. Drivers pay the price through substantially higher vehicle operating and maintenance costs. This compounds the fact that owning and operating an automobile is typically a household's largest transportation-related expense. According to AAA, the cost to own and operate a sedan was nearly $9,000 per year in 2012. Policies and development patterns that reduce our reliance on personal automobiles can help lower transportation costs. Consider smaller, more compact development patterns to further reduce the costs of heating and cooling.
+	</p>
+	<p data-bind="visible: viewModel.housing() == 'B' && viewModel.RoadCon.raw() <= 0.15">Your scenario has focused considerable investment on road and bridge maintenance, and conditions have improved substantially. This helps to lower vehicle operating and maintenance costs. However, owning and operating an automobile is typically a household's largest transportation-related expense. According to AAA, the cost to own and operate a sedan was nearly $9,000 per year in 2012. Policies and development patterns that reduce our reliance on personal automobiles can help lower transportation costs. Consider smaller, more compact development patterns to further reduce the costs of heating and cooling.
+	</p>
+	<p data-bind="visible: viewModel.housing() == 'B' && viewModel.RoadCon.raw() > 0.15 && viewModel.RoadCon.raw() <= 0.21">Smaller, more energy-efficient homes have helped to lower energy bills. Compact development patterns and a strong transit system help the regional economy to deal with energy price fluctuations. Your scenario has focused considerable investment on road and bridge maintenance, and conditions generally have been maintained at today's level. This helps to keep vehicle operating costs from significantly rising.
+	</p>
+	<p data-bind="visible: viewModel.housing() == 'B' && viewModel.RoadCon.raw() > 0.21 && viewModel.RoadCon.raw() <= 0.3">Smaller, more energy-efficient homes have helped to lower energy bills. Compact development patterns and a strong transit system help the regional economy to deal with energy price fluctuations. However, the region's investments in road and bridge maintenance haven't kept conditions from  worsening, and vehicle operating and maintenance costs have increased.
+	</p>
+	<p data-bind="visible: viewModel.housing() == 'B' && viewModel.RoadCon.raw() > 0.3">Smaller, more energy-efficient homes have helped to lower energy bills. Compact development patterns and a strong transit system help the regional economy to deal with energy price fluctuations. However, the region's roads and bridges have increasingly fallen into disrepair due to old age and a lack of investment. Drivers pay the price through substantially higher vehicle operating and maintenance costs.
+	</p>
+	<p>These costs do not account for the effect of inflation. An item that costs $1 today will likely cost between $2.00 and $2.50 in 2040. Growing world population and economic development may also mean the cost of energy will increase at an even greater rate.
+	</p>
+	<!-- /ko -->
+	<!-- ko if: $data == 'GHG' -->
+	<p data-bind="visible: viewModel.housing() == 'A' && viewModel.taxes() == 'Yes' && viewModel.GHG.raw() < 7.6">The region's goal of reducing greenhouse gases by 60 percent by 2040 presents a significant challenge. Your scenario helps to lower emissions by focusing on road pricing strategies that reduce the demand for vehicle travel and energy use. Achieving this goal will require more compact development patterns that help to reduce the demand for vehicle travel and energy. Additionally, we will need to produce energy with less carbon content, and make our vehicles, buildings, household appliances, and business operations more energy-efficient.
+	</p>
+	<p data-bind="visible: (viewModel.housing() != 'A' || viewModel.taxes() != 'Yes') && viewModel.GHG.raw() < 7.6">The region's goal of reducing greenhouse gases by 60 percent by 2040 presents a significant challenge. Your scenario helps to lower emissions by focusing on development patterns and/or road pricing strategies that help to reduce the demand for vehicle travel and energy use. To fully achieve the goal, we will also need to produce energy with less carbon and continue enhancing the energy efficiency of vehicles, buildings, household appliances, and business operations.
+	</p>
+	<p data-bind="visible: viewModel.GHG.raw() >= 7.6">The region's goal of reducing greenhouse gases by 60 percent by 2040 presents a significant challenge. Your scenario increases greenhouse gases per person, which is further increased by regional population growth. To achieve this goal will require more compact development patterns that help to reduce the demand for vehicle travel and energy. Additionally, we will need to produce energy with less carbon content and make our vehicles, buildings, household appliances, and business operations more energy-efficient.
+	</p>
+	<!-- /ko -->
+	<!-- ko if: $data == 'VMT' -->
+	<p data-bind="visible: viewModel.VMT.raw() <= 7340">Vehicle miles traveled have decreased in your scenario, helping to reduce congestion, improve road safety, and lower greenhouse gas emissions and the cost of transportation. Reducing VMT means the region will be less energy-dependent and may be more economically competitive than other more spread-out regions.
+	</p>
+	<p data-bind="visible: viewModel.VMT.raw() > 7340 && viewModel.VMT.raw() <= 7540">Vehicle miles traveled have remained fairly constant in your scenario, but increases in population and jobs mean that total VMT in the region has increased. Without making operating improvements, building costly new transportation facilities, or establishing congestion pricing on roads, it will become more difficult to keep congestion at manageable levels.
+	</p>
+	<p data-bind="visible: viewModel.VMT.raw() > 7540">The annual number of miles driven by the average person has increased in your scenario because commutes are longer and most people must use an automobile for nearly every trip. Transportation costs have increased due to longer commutes and an increasing amount of time stuck in traffic congestion. The increase in VMT per person is far greater than the current capability of the region to provide the additional road capacity needed to keep congestion at manageable levels.
+	</p>
+	<!-- /ko -->
+	<!-- ko if: $data == 'Transit' -->
+	<p data-bind="visible: viewModel.TransitCon.raw() <= 0.2">Investments in our regional public transit infrastructure have improved system condition making for smoother, safer, and more comfortable rides, and  attracting new riders to the system.
+	</p>
+	<p data-bind="visible: viewModel.TransitCon.raw() > 0.2 && viewModel.TransitCon.raw() <= 0.285">Investments in our regional public transit infrastructure have maintained current service levels, however, a considerable backlog of maintenance needs remain, particularly with stations and vehicle rehabilitations.
+	</p>
+	<p data-bind="visible: viewModel.TransitCon.raw() > 0.285">Investment levels in transit system preservation have been enough to maintain the system in roughly the same condition as it is in today. Substantial preservation needs remain outstanding, however all rail, trolley, and subway lines are able to continue to operate. Relatively poor conditions mean the region's transit system may have a hard time attracting riders who have other transportation options.
+	</p>
+	<p data-bind="visible: viewModel.housing() == 'B'">The annual number of transit trips has increased because new development in established areas has made transit a viable alternative to driving for many people.
+	</p>
+	<p data-bind="visible: viewModel.housing() == 'A'">Transit use has declined because most new development has occurred in areas that cannot be efficiently served by public transit. In contrast, focusing growth in towns and cities with existing transit infrastructure would allow more people to use transit for a portion of their trips.
+	</p>
+	<!-- /ko -->
+	<!-- ko if: $data == 'BikePed' -->
+	<p>
+	<span data-bind="visible: viewModel.mbikeped() > 0">Your scenario encourages more biking and walking trips by developing approximately <span data-bind="text: (viewModel.mbikeped() * 1250).toFixed(0)"></span> miles of new bike and pedestrian facilities, including new segments of the Circuit regional trail network, bike lanes, and sidewalks.
+	</span>
+	<span data-bind="visible: viewModel.BikePed.raw() >= 105">Biking and walking have become easier because most new development has occurred in areas where walking is pleasant and homes, stores, restaurants, schools, parks, and jobs are located in close proximity to one another. Incorporating more physical activity into our transportation system will improve health.
+	</span>
+	<span data-bind="visible: viewModel.BikePed.raw() < 105 && viewModel.BikePed.raw() >= 95">Development patterns that allow us to travel to stores, restaurants, schools, parks, or jobs by walking or biking will benefit our health and lower transportation expenses.
+	</span>
+	<span data-bind="visible: viewModel.BikePed.raw() < 95">The average person walks and bikes less in your scenario because new development has occurred outside existing towns and cities. Fewer people have stores, restaurants, schools, parks, or jobs that are close enough to walk or bike to.
+	</span>
+	</p>
+	<!-- /ko -->
+	<!-- ko if: $data == 'Congestion' -->
+	<p>
+	<!--A-->
+	<span data-bind="visible: viewModel.housing() == 'B' && viewModel.Congestion.raw() < 21.3">Congestion was reduced because compact development patterns mean more residents and workers can avoid traffic by walking, biking, or taking transit.</span>
+	<span data-bind="visible: viewModel.housing() == 'B' && viewModel.Congestion.raw() >= 21.3">Congestion only increased modestly because compact development patterns mean more residents and workers can avoid traffic by walking, biking, or taking transit.</span>
+	<span data-bind="visible: viewModel.housing() == 'A' && viewModel.Congestion.raw() < 28">Traffic congestion continues to increase because development is spread out and most people spend an increasing amount of time behind the steering wheel.</span>
+	<span data-bind="visible: viewModel.housing() == 'A' && viewModel.Congestion.raw() >= 28">Traffic congestion has increased substantially because development is spread out and most people spend an increasing amount of time behind the steering wheel.</span>
+	<!--C-->
+	<span data-bind="visible: viewModel.RoadCon.raw() <= 0.2">Improved road and bridge conditions helps to keep drivers moving.</span>
+	<span data-bind="visible: viewModel.RoadCon.raw() <= 0.25 && viewModel.RoadCon.raw() > 0.2">Road and bridge conditions are about the same as today, which helps to keep delay from becoming even worse.</span>
+	<span data-bind="visible: viewModel.RoadCon.raw() > 0.25">Worsening road and bridge conditions are slowing down drivers, causing additional congestion.</span>
+	<!--D-->
+	<span data-bind="visible: $.inArray('A', viewModel.taxtype()) > -1">Your scenario used congestion pricing to better align the supply of road space with demand for it during peak travel conditions.</span>
+	<span data-bind="visible: viewModel.housing() == 'B' && $.inArray('A', viewModel.taxtype()) == -1"><Congestion pricing spreads out traffic demand during the peak periods of the day, and could be another effective way to reduce congestion./span>
+	<span data-bind="visible: viewModel.housing() == 'A' && $.inArray('A', viewModel.taxtype()) == -1">Congestion pricing spreads out traffic demand during the peak periods of the day, and could be an effective way to reduce congestion.</span>
+	</p>
+	<!-- /ko -->
+	<!-- ko if: $data == 'Safety' -->
+
+	<p>The region has nearly achieved the Federal Highway Administration goal of reducing fatalities to less than 1 per every 100 million vehicle miles traveled, thanks to numerous efforts to make roads and vehicles safer for all users. Often overlooked is the effect of exposure, the more one drives the more risk one takes in being involved in a traffic accident, fatal or not. <i>Choices &amp; Voices</i> assumes we reach the FHWA goal and then considers the impact of more or less driving on road fatalities per 100,000 capita.
+	</p>
+	<!-- /ko -->
+
+	</div>
+	<div class="span2" style="border-left:1px dashed #999;border-right:1px dashed #999;padding:0 20px;margin-bottom:20px;">
+	<h5>Your Scenario:</h5>
+	<div style="padding:10px;border-radius:10px;background-color:white;color:#394C69;border:2px solid;margin-bottom:10px" data-bind="style: {borderColor: viewModel.is2010() ? '#394C69' : viewModel.IdealDirection($data).color == 'red' ? '#e05531' : '#ABD14D'}"><img src="img/nochange.png" style="height:38px;vertical-align:middle;float:left;" data-bind="attr: {src: viewModel.IdealDirection($data).src}"/><span style="font-size:1.5em" data-bind="text: viewModel.PercentOfIdeal($data), style: {color: viewModel.is2010() ? '#394C69' : viewModel.IdealDirection($data).color == 'red' ? '#e05531' : '#ABD14D'}">0%</span><br/><span data-bind="text:viewModel[$data]"></span></div>
+	</div>
+	<div class="span2" style="border-right:1px dashed #999;">
+	<h5>Everyone's Scenario:</h5>
+	<div style="padding:10px;"><img src="img/nochange.png" style="height:38px;vertical-align:middle;float:left;" data-bind="attr: {src: avgModel.IdealDirection($data).src}"/><span style="font-size:1.5em" data-bind="text: avgModel.PercentOfIdeal($data), style: {color: avgModel.IdealDirection($data).color == 'red' ? '#e05531' : '#ABD14D'}">0%</span><br/><span data-bind="text:avgModel[$data]"></span></div>
+	</div>
+	<div class="span2">
+	<h5>Compare to Today:</h5>
+	<div style="padding: 30px 10px 10px;"><span data-bind="text:model2010[$data]"></span></div>
+	</div>
+	</div>
+</script>
+</div>
+</div>
+
+		</div>
+
+
+
+		</div>
+
+
+	</div>
+	    <div class="modal hide" id="myModal">
+    <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h3><!--Please balance budget-->&nbsp;</h3>
+    </div>
+    <div class="modal-body">
+    <p>Please balance your transportation budget before continuing. You can also use the green bar at the top of the page to navigate back and revise your development pattern and funding choices, without losing the selections you have made on the Transportation Projects page.
+    </p>
+    </div>
+    <div class="modal-footer">
+    <a href="#" class="btn" data-dismiss="modal">Close</a>
+    </div>
+    </div>
+</body>
+</html>
