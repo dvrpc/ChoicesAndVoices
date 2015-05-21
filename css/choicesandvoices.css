@@ -1,0 +1,305 @@
+body {
+	font-family:"Franklin Gothic Medium", "Franklin Gothic", "ITC Franklin Gothic", Arial, sans-serif;
+	font-size:0.9em;
+}
+#indicators {
+	vertical-align:top;
+	background-color:#394C69;
+	padding:0;
+}
+#indicators div.row-fluid {
+	color:#333;
+	border-bottom:1px dashed #999;
+}
+#indicators div.row-fluid:last-child {
+	border-bottom:0px dashed #999;
+}
+#indicators h3 {
+	color:white;
+	margin:0;
+	font-size:1.1em;
+	font-weight:normal;
+	line-height:38px;
+}
+#indicators p {
+	margin:0;
+	padding:0 5px 0 0;
+	font-size:1.0em;
+	color:#ccc;
+	font-family:'open sans', arial, sans-serif;
+	line-height:38px;
+}
+#indicators p.info {
+	margin:10px;
+	font-size:0.9em;
+	line-height:1.1em;
+	color:white;
+}
+h1,h2,h3 {
+	font-family:"ITC Franklin Gothic W01 Md","Franklin Gothic Medium", "Franklin Gothic", "ITC Franklin Gothic", Arial, sans-serif;
+	color: #394C69;
+}
+h1 {
+	padding:0 0 10px 0;
+	text-align:center;
+	border:1px dotted #394C69;
+	border-bottom:0;
+}
+h2 {
+	font-size:1.6em;
+	padding:0;
+	margin:0;
+}
+
+h3 {
+	font-size:1.25em;
+	line-height:1.8em;
+}
+
+#mainContent table {
+	border-collapse:collapse;
+	margin:10px 0;
+	font-size:0.9em;
+}
+#mainContent td {
+	margin:0;
+	padding:5px;
+	border:1px dotted #aaa;
+	vertical-align:top;
+}
+#mainContent th {
+	border:0px;
+	margin:0;
+	padding:5px;
+	vertical-align:bottom;
+	border-bottom: 1px dotted #AAAAAA;
+}
+#mainContent td:not(:first-child) { text-align:right; }
+#mainContent a {
+	color:#394C69;
+	text-decoration:underline;
+}
+#mainContent ul, #mainContent li {
+	list-style-type:none;
+	padding-left:0;
+	margin-left:0;
+}
+#mainContent li.selected {
+	background-color:#efe;
+	font-weight:bold;
+}
+.plus {
+	cursor:pointer;
+	background:url('http://www.dvrpc.org/energyclimate/modelordinance/img/plus.gif') no-repeat left center;
+	padding-left:15px;
+	clear:both;
+}
+.minus {
+	background-image:url('http://www.dvrpc.org/energyclimate/modelordinance/img/minus.gif');
+}
+.section {
+	margin:5px;
+	padding:5px;
+	border:1px solid #eee;
+}
+#pane {
+	border:1px solid #394C69;
+	text-align:center;
+	background-color:#ABD14D;
+}
+
+.progress {
+	background-color: white;
+	background-image: none;
+	background-repeat: repeat-x;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	border-radius: 4px 4px 4px 4px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset, 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+#pane a {
+	display:inline-block;
+	margin: 10px 0;
+	padding: 0 25px;
+	text-decoration:none;
+	color:#394C69;
+	vertical-align:middle;
+	font-size:1.1em;
+}
+#pane a:not(:last-child) {
+	border-right:1px dotted white;
+}
+#pane a.selected {
+	font-weight:bold;
+}
+#pane a:hover {
+	color:#EFF4FB;
+}
+body #mainContent .indent {
+	margin-left:2em;
+}
+.view {
+	margin-top:10px;
+	border:1px solid #999;
+	background-color:#EFF4FB;
+	padding:20px;
+	color:#394C69;
+}
+p {
+	line-height:1.5em;
+	font-family:'open sans', arial, sans-serif;
+}
+input[type="image"], input[type="checkbox"], input[type="radio"] {
+	display:inline-block;
+}
+.nextButton { display:none; }
+.button { border:1px solid #394C69;background-color:#ABD14D;margin:20px 0 0 0;padding:5px 10px;font-family:'Franklin Gothic Demi',sans-serif;text-transform:uppercase;letter-spacing:2px;font-size:1.1em;box-shadow:3px 3px 2px #999;cursor:pointer;color:#394C69;}
+.noheight { overflow:hidden;display:block;height:0px; }
+.clear { clear:both;height:0;width:0;}
+.dropcap { font-family:"ITC Franklin Gothic W01 Md","Franklin Gothic Medium", "Franklin Gothic", "ITC Franklin Gothic", Arial, sans-serif;color:#ABD14D;text-outline:#394C69;text-shadow:-1px 0 0 #394C69, 0 -1px 0 #394C69, 1px 0 0 #394C69, 0 1px 0 #394C69;font-size:4.5em;float:left;vertical-align:text-top;line-height:0.9em;padding-right:10px;}
+
+.picstrip { display:block; position:relative;height:75px;}
+.picstrip img { position:absolute;height:75px;width:75px;}
+
+.ui-effects-transfer {border: 2px dotted gray;background-color:rgba(0,0,0,0.1);}
+
+#slider2010.ui-widget-content { border:0;border-bottom:1px dashed #999;background:none transparent; }
+#slider2010 .ui-slider-handle { background-image:url('img/grayarrow.png');background-color:transparent;border:0;height:40px;width:50px;border-radius:0;box-shadow:none;}
+#slider2010 .ui-state-hover,#slider2010 .ui-state-active,#slider2010 .ui-state-focus { background-position:0;outline:0;}
+body .ui-slider-handle {z-index:300;}
+.title {font-weight:normal;}
+.popover-content .row-fluid [class*="span"] { margin-top: 2.12766%; }
+.popover-content { padding-top:0;font-size:0.9em;color:#394C69;font-style:italic; }
+.view *[rel="popover"], .info {
+	padding-right:16px;
+	background: center right url('img/info.png') no-repeat;
+}
+.modal-body img { max-width:100% !important; }
+.affix, .affix-bottom { top:0px; right:20px;position:fixed;}
+.affix-top { top:122px;right:20px;position:absolute; }
+.progress { cursor:pointer;margin-bottom:5px;overflow:visible; }
+.ui-resizable-e { width:auto; font-size: 100%;
+border: 1px solid rgba(0, 0, 0, 0.2);
+padding: 3px;
+background: #f7f7f7;
+border-radius: 6px;
+position: absolute;
+top: -4px;
+text-shadow:none;
+color:#394C69;
+min-width:28px;
+text-align: center;
+}
+.view .row-fluid [class*="span"] { margin-top:2.12766%; }
+.view .modal .row-fluid [class*="span"] { margin-top:0; }
+
+#mainContent .nav-pills {display: block;}
+#mainContent .nav-pills a {text-decoration:none;font-weight:bold;}
+#mainContent .nav-pills .active a {color:white;background:#394C69;}
+
+.handle:after {
+	content:' ';
+	display: block;
+	position: absolute;
+	bottom:-18px;
+	opacity:0.5;
+	text-align:center;
+	width:100%;
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	margin-top: 1px;
+	line-height: 14px;
+	vertical-align: text-top;
+	background-image: url("img/glyphicons-halflings.png");
+	background-position: -456px -118px;
+	background-repeat: no-repeat;
+}
+
+#map {
+	 text-align:center;
+}
+
+#map .map-inner {
+	width:400px;
+	height:300px;
+	display: inline-block;
+	position: relative;
+}
+
+#map .map-inner img {
+	position: absolute;
+	top:0;
+	left:0;
+	width:400px;
+	z-index: attr(data-z);
+}
+
+#mainContent label a, #mainContent label a:hover {
+	text-decoration:none;
+	border-radius: 50%;
+	background: rgb(171, 209, 77);
+	padding:0;
+	margin:0;
+	color:white;
+	min-width: 20px;
+	min-height: 20px;
+	display: inline-block;
+	text-align: center;
+	line-height: 20px;
+	font-size: 12px;
+	vertical-align: middle;
+}
+
+#mainContent input[disabled] + a {
+	background: #ccc;
+}
+
+.alert-error {
+	color: rgb(224, 85, 49);
+	background: rgba(224, 85, 49, 0.1);
+	border-color: rgba(224, 85, 49, 0.3);
+}
+
+.progress .bar {
+	width:10%;
+	text-align:left;
+	background: #abd14d; /* Old browsers */
+	background: -moz-linear-gradient(top,  #abd14d 0%, #94b542 99%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#abd14d), color-stop(99%,#94b542)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #abd14d 0%,#94b542 99%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #abd14d 0%,#94b542 99%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #abd14d 0%,#94b542 99%); /* IE10+ */
+	background: linear-gradient(to bottom,  #abd14d 0%,#94b542 99%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#abd14d', endColorstr='#94b542',GradientType=0 ); /* IE6-9 */
+}
+
+#mainContent .vertical-text {
+    vertical-align: middle;
+    width:20px;
+    overflow:hidden;
+}
+#mainContent .vertical-text>div {
+    width:20px;
+    display: inline-block;
+    white-space: nowrap;
+    line-height: 20px;
+    -moz-transform: translateY(50%) rotate(-90deg);
+    -moz-transform-origin: center;
+    -webkit-transform: translateY(50%) rotate(-90deg);
+    -webkit-transform-origin: center;
+    transform: translateY(50%) rotate(-90deg);
+    transform-origin: center;
+}
+#mainContent .vertical-text>div:after {
+    content: "";
+    display: block;
+    margin: -20px 0 100%;
+}
+#mainContent .vertical-text+td {
+    text-align:left;
+    border-left: 1px dotted #aaa;
+}
+#mainContent td:first-child {
+    border-left: 0;
+}
